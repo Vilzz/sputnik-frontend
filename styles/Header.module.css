@@ -7,10 +7,12 @@
   height: 60px;
   padding: 50px 30px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .header a {
-  color: #333;
+  color: rgb(75, 75, 75);
   margin-right: 20px;
 }
 
@@ -22,16 +24,6 @@
   align-items: center;
   justify-content: center;
   list-style: none;
-}
-
-.logo {
-  color: red;
-  font-size: 20px;
-  text-transform: uppercase;
-}
-
-.logo a {
-  color: red;
 }
 
 @media (max-width: 768px) {
@@ -50,7 +42,5 @@
     margin-right: 0;
   }
 
-  .logo {
-    margin: 20px 0;
-  }
+  
 }
