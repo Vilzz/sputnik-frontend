@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 const SideMenu = ({ categories }) => {
-  const [active, setActive] = useState(0)
+  const router = useRouter()
   return (
     <div className='sidemenu'>
       <h3>Категории</h3>
@@ -11,10 +12,12 @@ const SideMenu = ({ categories }) => {
             <li
               key={category._id}
               className={
-                idx === active ? 'list-group-item active' : 'list-group-item'
+                category.slug === router.query.slug
+                  ? 'list-group-item active'
+                  : 'list-group-item'
               }
             >
-              <Link href={`/makets/${category.slug}`}>
+              <Link href={`/catalog/${category.slug}`}>
                 <a>{category.name}</a>
               </Link>
             </li>

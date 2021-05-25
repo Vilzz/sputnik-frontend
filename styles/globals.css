@@ -15,3 +15,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.category_card{
+  width: 14rem;
+}

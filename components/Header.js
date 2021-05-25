@@ -54,9 +54,9 @@ Header.defaultProps = {
     },
     {
       id: 'cf4c4547',
-      ru: 'Наука',
-      en: 'Science',
-      link: '/science',
+      ru: 'Каталог',
+      en: 'Catalog',
+      link: '/catalog',
     },
     {
       id: '593fe2fd',
