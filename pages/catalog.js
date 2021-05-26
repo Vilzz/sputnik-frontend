@@ -1,16 +1,22 @@
 import axios from 'axios'
+import { useRouter } from 'next/router'
 import { API_URL } from '@/config/index.js'
 import Layout from '@/components/Layout'
 import CategoryCard from '@/components/CategoryCard'
 
 const Catalog = ({ categories }) => {
+  const router = useRouter()
   return (
     <Layout
-      title='Каталог макетов'
-      description='Каталог работ макетной студии Спутник'
+      title={router.locale === 'ru-RU' ? 'Каталог макетов' : 'Makets catalog'}
+      description={
+        router.locale === 'ru-RU'
+          ? 'Каталог работ макетной студии Спутник'
+          : 'Sputnik studio models catalog'
+      }
       keywords='каталог, catalog, макеты, makets'
     >
-      <div className='col d-lg-flex justify-content-evenly mt-3 px-5'>
+      <div className='col d-lg-flex justify-content-evenly flex-wrap my-4'>
         {categories.map((category) => (
           <CategoryCard category={category} key={category._id} />
         ))}

@@ -7,14 +7,15 @@ const Header = ({ menu_locale }) => {
   const router = useRouter()
   return (
     <header className={styles.header}>
-      <div>
+      <div className='d-flex align-items-center justify-content-between'>
         <Link href={`/`}>
           <a>
             <Image
               src='/sputnik.svg'
-              width='135'
-              height='95'
+              width='138'
+              height='110'
               alt='Sputnik Logo'
+              className='py-0'
             />
           </a>
         </Link>

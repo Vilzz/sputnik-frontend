@@ -6,6 +6,7 @@ const SideMenu = ({ categories }) => {
   return (
     <div className='sidemenu'>
       <h3>Категории</h3>
+      <hr />
       <ul className='list-group list-group-flush'>
         {categories !== null &&
           categories.map((category, idx) => (
@@ -18,7 +19,7 @@ const SideMenu = ({ categories }) => {
               }
             >
               <Link href={`/catalog/${category.slug}`}>
-                <a>{category.name}</a>
+                <a className='sidemenu-link'>{category.name}</a>
               </Link>
             </li>
           ))}
