@@ -1,26 +1,38 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-const SideMenu = ({ categories }) => {
+const SideMenu = ({ sideMenuItems }) => {
   const router = useRouter()
   return (
     <div className='sidemenu'>
       <h3>Категории</h3>
       <hr />
       <ul className='list-group list-group-flush'>
-        {categories !== null &&
-          categories.map((category, idx) => (
+        {sideMenuItems !== null &&
+          sideMenuItems.map(({ id, name, slug, maketsLength }) => (
             <li
-              key={category._id}
+              key={id}
               className={
-                category.slug === router.query.slug
-                  ? 'list-group-item active'
-                  : 'list-group-item'
+                slug === router.query.slug
+                  ? 'list-group-item d-flex justify-content-between align-items-start active'
+                  : 'list-group-item d-flex justify-content-between align-items-start'
               }
             >
-              <Link href={`/catalog/${category.slug}`}>
-                <a className='sidemenu-link'>{category.name}</a>
-              </Link>
+              <div>
+                <Link href={`/catalog/${slug}`}>
+                  <a className='sidemenu-link'>{name}</a>
+                </Link>
+              </div>
+
+              <span
+                className={
+                  slug === router.query.slug
+                    ? 'badge bg-danger rounded-pill'
+                    : 'badge bg-primary rounded-pill'
+                }
+              >
+                {maketsLength}
+              </span>
             </li>
           ))}
       </ul>

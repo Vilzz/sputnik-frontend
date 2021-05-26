@@ -42,7 +42,7 @@ const CategoryCard = ({ category }) => {
               <h6>{category.name_en}</h6>
             </div>
             <div>
-              <Link href={`/catalog/${router.locale}/${category.slug}`}>
+              <Link href={`/catalog/${category.slug}`}>
                 <a className='btn btn-primary'>Get makets</a>
               </Link>
             </div>

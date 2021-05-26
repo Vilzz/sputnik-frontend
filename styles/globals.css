@@ -41,7 +41,13 @@ a {
   
 }
 .sidemenu-link{
-  font-weight: 300;
+  font-weight: 600;
+}
+.sidemenu .list-group-item{
+  font-size: 13px;
+  }
+.list-group-item .badge{
+  font-size: 14px;
 }
 .list-group-item.active {
   border-radius: 4px;

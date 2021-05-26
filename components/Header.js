@@ -30,9 +30,9 @@ const Header = ({ menu_locale }) => {
                   </Link>
                 </li>
               ))
-            : menu.map((item) => (
+            : menu_locale.map((item) => (
                 <li key={item.id}>
-                  <Link href={`${router.locale}${item.link}`}>
+                  <Link href={`${item.link}`}>
                     <a>{item.en}</a>
                   </Link>
                 </li>
