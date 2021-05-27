@@ -4,9 +4,10 @@ const CardsHolder = ({ category }) => {
   return (
     <div className='category-cards'>
       <h3>{category.name}</h3>
-      <div className='d-flex justify-content-evenly align-items-start'>
+      <hr />
+      <div className='d-flex flex-wrap justify-content-evenly align-items-start'>
         {category.makets.map((maket) => (
-          <MaketCard maket={maket} />
+          <MaketCard maket={maket} key={maket._id} />
         ))}
       </div>
     </div>

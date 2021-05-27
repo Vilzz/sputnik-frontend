@@ -8,7 +8,6 @@ import { API_URL } from '@/config/index.js'
 
 const Category = ({ sideMenuItems, category }) => {
   const router = useRouter()
-  const { slug } = router.query
   return (
     <Layout
       title={router.locale === 'ru-RU' ? 'Каталог макетов' : 'Makets catalog'}
@@ -19,10 +18,10 @@ const Category = ({ sideMenuItems, category }) => {
       }
       keywords='каталог, catalog, макеты, makets'
     >
-      <div className='col-3'>
+      <div className='col col-md-3'>
         <SideMenu sideMenuItems={sideMenuItems} />
       </div>
-      <div className='col-9'>
+      <div className='col col-md-9'>
         <CardsHolder category={category} />
       </div>
     </Layout>

@@ -21,19 +21,19 @@ const Header = ({ menu_locale }) => {
         </Link>
       </div>
       <nav>
-        <ul>
+        <ul className='nav'>
           {router.locale === 'ru-RU'
             ? menu_locale.map((item) => (
-                <li key={item.id}>
+                <li className='nav-item' key={item.id}>
                   <Link href={item.link}>
-                    <a>{item.ru}</a>
+                    <a className='nav-link'>{item.ru}</a>
                   </Link>
                 </li>
               ))
             : menu_locale.map((item) => (
-                <li key={item.id}>
+                <li className='nav-item' key={item.id}>
                   <Link href={`${item.link}`}>
-                    <a>{item.en}</a>
+                    <a className='nav-link'>{item.en}</a>
                   </Link>
                 </li>
               ))}

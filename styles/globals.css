@@ -19,7 +19,7 @@ a {
   border: 1px solid #000;
 }
 .category_card{
-  width: 17rem;
+  width: 16rem;
   margin-bottom: 30px;
 }
 .card-title h6{
@@ -54,4 +54,7 @@ a {
 }
 .list-group-item.active a:hover {
   color:white;
+}
+.maket-card p{
+  font-size: 14px;
 }
