@@ -26,6 +26,9 @@ a {
   font-weight: 600;
   font-style: italic;
 }
+.maket-body{
+  min-height: 310px;
+}
 .sidemenu{
   border:1px solid lightgray;
   border-radius: 10px;
@@ -57,4 +60,18 @@ a {
 }
 .maket-card p{
   font-size: 14px;
+}
+.scale-badge{
+  color: white;
+  font-weight: 600;
+  padding: 0.25rem 0.35rem;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+.scale-card{
+  min-height:120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
 }

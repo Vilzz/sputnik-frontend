@@ -22,8 +22,8 @@ const Maket = ({ maket }) => {
           <h5>{maket.description}</h5>
           <h3>Доступные масштабы:</h3>
           <div className='mb-3'>
-            {maket.scales.map((scale, idx) => (
-              <span className='badge bg-primary' key={idx}>
+            {maket.scales.map((scale) => (
+              <span className='badge bg-primary' key={scale}>
                 {scale}
               </span>
             ))}
