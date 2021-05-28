@@ -2,10 +2,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 const MaketCard = ({ maket }) => {
   return (
-    <div className='card maket-card' style={{ width: '18rem' }}>
+    <div className='card maket-card mb-3' style={{ width: '18rem' }}>
       <Link href={`/catalog/maket/${maket._id}`}>
         <a>
-          <Image src={maket.images[0]} width='300px' height='450px' />
+          <Image
+            src={maket.images[0]}
+            width='300px'
+            height='450px'
+            alt={maket.name}
+          />
         </a>
       </Link>
 
