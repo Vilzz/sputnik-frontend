@@ -16,6 +16,8 @@ const Catalog = ({ categories }) => {
       }
       keywords='каталог, catalog, макеты, makets'
     >
+      <h1 className='my-3'>Каталог продукции</h1>
+      <hr />
       <div className='d-flex justify-content-evenly align-items-center flex-wrap my-4'>
         {categories.map((category) => (
           <CategoryCard category={category} key={category._id} />

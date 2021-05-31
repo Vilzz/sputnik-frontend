@@ -33,8 +33,8 @@ export const getServerSideProps = async (ctx) => {
   const res = await axios.get(`${API_URL}categories?sort=order`)
   const sideMenuItems = res.data.data
     .filter((item) => item.showinmenu === true)
-    .map(({ _id, name, slug, makets }) => {
-      return { id: _id, name, slug, maketsLength: makets.length }
+    .map(({ _id, name, name_en, slug, makets }) => {
+      return { id: _id, name, name_en, slug, maketsLength: makets.length }
     })
   const category = res.data.data.filter(
     (item) => item.slug === ctx.query.slug

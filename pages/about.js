@@ -16,13 +16,16 @@ const About = () => {
     >
       {router.locale === 'ru-RU' ? (
         <div className='row'>
-          <div className='row'>
-            <h1 className='text-center mb-4'>О макетной компании "Спутник"</h1>
-          </div>
+          <h1 className='my-3'>О макетной компании "Спутник"</h1>
           <hr />
           <div className='row'>
             <div className='col-12 col-md-4 py-2'>
-              <Image src='/images/about_us.jpg' width='400px' height='600px' />
+              <Image
+                src='/images/about_us.jpg'
+                width='400px'
+                height='600px'
+                priority='true'
+              />
             </div>
             <div className='col-12 col-md-8 py-1 px-5'>
               <p className='lead'>

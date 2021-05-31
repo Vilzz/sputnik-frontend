@@ -3,7 +3,7 @@ import Layout from '@/components/Layout'
 const News = () => {
   return (
     <Layout>
-      <h1>Новости</h1>
+      <h1 className='my-3'>Новости</h1>
     </Layout>
   )
 }

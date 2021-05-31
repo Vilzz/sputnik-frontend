@@ -4,12 +4,12 @@ import { useRouter } from 'next/router'
 const SideMenu = ({ sideMenuItems }) => {
   const router = useRouter()
   return (
-    <div className='sidemenu'>
-      <h3>Категории</h3>
+    <div className='sidemenu mt-4'>
+      <h3>{router.locale === 'ru-RU' ? 'Категория' : 'Category'}</h3>
       <hr />
       <ul className='list-group list-group-flush'>
         {sideMenuItems !== null &&
-          sideMenuItems.map(({ id, name, slug, maketsLength }) => (
+          sideMenuItems.map(({ id, name, name_en, slug, maketsLength }) => (
             <li
               key={id}
               className={
@@ -20,7 +20,9 @@ const SideMenu = ({ sideMenuItems }) => {
             >
               <div>
                 <Link href={`/catalog/${slug}`}>
-                  <a className='sidemenu-link'>{name}</a>
+                  <a className='sidemenu-link'>
+                    {router.locale === 'ru-RU' ? name : name_en}
+                  </a>
                 </Link>
               </div>
 

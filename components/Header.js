@@ -1,44 +1,48 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import styles from '@/styles/Header.module.css'
+import { Nav, Navbar, NavbarBrand } from 'react-bootstrap'
 
 const Header = ({ menu_locale }) => {
   const router = useRouter()
   return (
-    <header className={styles.header}>
-      <div className='d-flex align-items-center justify-content-between'>
-        <Link href={`/`}>
-          <a>
-            <Image
-              src='/sputnik.svg'
-              width='138'
-              height='110'
-              alt='Sputnik Logo'
-              className='py-0'
-            />
-          </a>
-        </Link>
-      </div>
-      <nav>
-        <ul className='nav'>
-          {router.locale === 'ru-RU'
-            ? menu_locale.map((item) => (
-                <li className='nav-item' key={item.id}>
-                  <Link href={item.link}>
-                    <a className='nav-link'>{item.ru}</a>
-                  </Link>
-                </li>
-              ))
-            : menu_locale.map((item) => (
-                <li className='nav-item' key={item.id}>
-                  <Link href={`${item.link}`}>
-                    <a className='nav-link'>{item.en}</a>
-                  </Link>
-                </li>
-              ))}
-        </ul>
-      </nav>
+    <header>
+      <Navbar bg='light' expand='lg' className='shadow'>
+        <NavbarBrand className='ms-3'>
+          <Link href={`/`}>
+            <a>
+              <Image
+                src='/sputnik.svg'
+                width='138'
+                height='110'
+                alt='Sputnik Logo'
+                priority='true'
+                className='navbar-brand py-0'
+              />
+            </a>
+          </Link>
+        </NavbarBrand>
+        <Navbar.Toggle aria-controls='basic-navbar-nav' className='me-3' />
+        <Navbar.Collapse id='basic-navbar-nav' className='justify-content-end'>
+          <Nav className='ms-3 me-5'>
+            {router.locale === 'ru-RU'
+              ? menu_locale.map((item) => (
+                  <li className='nav-item' key={item.id}>
+                    <Link href={item.link}>
+                      <a className='nav-link'>{item.ru}</a>
+                    </Link>
+                  </li>
+                ))
+              : menu_locale.map((item) => (
+                  <li className='nav-item' key={item.id}>
+                    <Link href={item.link}>
+                      <a className='nav-link'>{item.en}</a>
+                    </Link>
+                  </li>
+                ))}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     </header>
   )
 }

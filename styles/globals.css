@@ -68,6 +68,9 @@ a {
   margin-right: 10px;
   border-radius: 5px;
 }
+.scale-badge:hover{
+  color: white
+}
 .scale-card{
   min-height:120px;
   display: flex;

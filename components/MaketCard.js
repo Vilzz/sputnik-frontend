@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 const MaketCard = ({ maket }) => {
+  const router = useRouter()
   return (
     <div className='card maket-card mb-3' style={{ width: '18rem' }}>
       <Link href={`/catalog/maket/${maket._id}`}>
@@ -15,10 +17,12 @@ const MaketCard = ({ maket }) => {
       </Link>
 
       <div className='card-body maket-body'>
-        <h4 className='card-title'>{maket.name}</h4>
+        <h4 className='card-title'>
+          {router.locale === 'ru-RU' ? maket.name : maket.name_en}
+        </h4>
         <hr />
         <p className='card-text' style={{ minHeight: '60px' }}>
-          {maket.shortdesc}
+          {router.locale === 'ru-RU' ? maket.shortdesc : maket.shortdesc_en}
         </p>
         <div className='scale-card mb-3'>
           <div>
@@ -29,7 +33,6 @@ const MaketCard = ({ maket }) => {
               </span>
             ))}
           </div>
-
           <Link href={`/catalog/maket/${maket._id}`}>
             <a className='btn btn-primary'>Подробнее</a>
           </Link>
