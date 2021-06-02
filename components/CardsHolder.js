@@ -1,5 +1,5 @@
-import React from 'react'
 import Image from 'next/image'
+import Head from 'next/head'
 import MaketCard from './MaketCard'
 
 const CardsHolder = ({ category }) => {
@@ -12,7 +12,7 @@ const CardsHolder = ({ category }) => {
           height='70'
           alt={category.name1}
         />
-        <h1 className='ms-3'>{category.name}</h1>
+        <h1 className='ms-4 text-primary display-5'>{category.name}</h1>
       </div>
       <hr />
       <div className='d-flex flex-wrap justify-content-evenly align-items-start'>

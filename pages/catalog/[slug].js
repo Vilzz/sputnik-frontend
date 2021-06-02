@@ -10,11 +10,11 @@ const Category = ({ sideMenuItems, category }) => {
   const router = useRouter()
   return (
     <Layout
-      title={router.locale === 'ru-RU' ? 'Каталог макетов' : 'Makets catalog'}
+      title={router.locale === 'ru-RU' ? category.name : category.name_en}
       description={
         router.locale === 'ru-RU'
-          ? 'Каталог работ макетной студии Спутник'
-          : 'Maket studio Sputnik catalog of models'
+          ? category.description
+          : category.description_en
       }
       keywords='каталог, catalog, макеты, makets'
     >

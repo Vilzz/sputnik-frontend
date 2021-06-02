@@ -26,9 +26,6 @@ a {
   font-weight: 600;
   font-style: italic;
 }
-.maket-body{
-  min-height: 310px;
-}
 .sidemenu{
   border:1px solid lightgray;
   border-radius: 10px;
@@ -58,18 +55,28 @@ a {
 .list-group-item.active a:hover {
   color:white;
 }
+.maket-card{
+  width: 18rem;
+}
 .maket-card p{
   font-size: 14px;
 }
-.scale-badge{
+.maket-body{
+  min-height: 310px;
+}
+.maket-desc{
+  font-style: italic;
+  min-height: 60px;
+}
+.scale-badge,.category-badge{
   color: white;
   font-weight: 600;
   padding: 0.25rem 0.35rem;
   margin-right: 10px;
   border-radius: 5px;
 }
-.scale-badge:hover{
-  color: white
+.category-badge:hover{
+  color: #dcdcdc;
 }
 .scale-card{
   min-height:120px;

@@ -16,7 +16,11 @@ const Catalog = ({ categories }) => {
       }
       keywords='каталог, catalog, макеты, makets'
     >
-      <h1 className='my-3'>Каталог продукции</h1>
+      <h1 className='my-3 ms-3 text-primary display-5'>
+        {router.locale === 'ru-RU'
+          ? 'Каталог продукции'
+          : 'Catalog of products'}
+      </h1>
       <hr />
       <div className='d-flex justify-content-evenly align-items-center flex-wrap my-4'>
         {categories.map((category) => (

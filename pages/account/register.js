@@ -3,8 +3,9 @@ import Link from 'next/link'
 import Layout from '@/components/Layout'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { ImUserPlus } from 'react-icons/im'
 import AuthContext from '@/context/AuthContext'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Row, Col } from 'react-bootstrap'
 
 const RegisterPage = () => {
   const [username, setUsername] = useState('')
@@ -27,57 +28,71 @@ const RegisterPage = () => {
 
   return (
     <Layout title='Регистрация пользователя'>
-      <div>
-        <h1>Регистрация</h1>
-      </div>
       <ToastContainer />
-      <Form onSubmit={(e) => handleSubmit(e)}>
-        <Form.Group controlId='formBasicName' className='mb-3'>
-          <Form.Label>Имя пользователя</Form.Label>
-          <Form.Control
-            type='text'
-            name='username'
-            value={username}
-            required
-            placeholder='Введите имя пользователя'
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group controlId='formBasicEmail' className='mb-3'>
-          <Form.Label>Электронная почта</Form.Label>
-          <Form.Control
-            type='email'
-            name='email'
-            value={email}
-            required
-            placeholder='Введите адрес эл. почты'
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group controlId='formBasicPassword' className='mb-3'>
-          <Form.Label>Пароль</Form.Label>
-          <Form.Control
-            type='password'
-            name='password'
-            value={password}
-            placeholder='Введите пароль'
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group controlId='formBasicPassword2' className='mb-3'>
-          <Form.Label>Пароль</Form.Label>
-          <Form.Control
-            type='password'
-            name='password'
-            value={password2}
-            placeholder='Повторите пароль'
-            onChange={(e) => setPassword2(e.target.value)}
-          />
-        </Form.Group>
-        <Button variant='primary' type='submit'>
-          Зарегистрироваться
-        </Button>
-      </Form>
+      <Row className='py-5'>
+        <Col md={{ span: 6, offset: 1 }}>
+          <div className='mb-4'>
+            <h1 className='text-primary display-4'>
+              <ImUserPlus className='me-2' />
+              Регистрация
+            </h1>
+          </div>
+          <hr />
+          <Form onSubmit={(e) => handleSubmit(e)}>
+            <Form.Group controlId='formBasicName' className='mb-3'>
+              <Form.Label>Имя пользователя</Form.Label>
+              <Form.Control
+                type='text'
+                name='username'
+                value={username}
+                required
+                placeholder='Введите имя пользователя'
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId='formBasicEmail' className='mb-3'>
+              <Form.Label>Электронная почта</Form.Label>
+              <Form.Control
+                type='email'
+                name='email'
+                value={email}
+                required
+                placeholder='Введите адрес эл. почты'
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId='formBasicPassword' className='mb-3'>
+              <Form.Label>Пароль</Form.Label>
+              <Form.Control
+                type='password'
+                name='password'
+                value={password}
+                placeholder='Введите пароль'
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId='formBasicPassword2' className='mb-3'>
+              <Form.Label>Пароль</Form.Label>
+              <Form.Control
+                type='password'
+                name='password'
+                value={password2}
+                placeholder='Повторите пароль'
+                onChange={(e) => setPassword2(e.target.value)}
+              />
+            </Form.Group>
+            <Button variant='primary' type='submit'>
+              Зарегистрироваться
+            </Button>
+          </Form>
+          <h5 className='mt-3'>
+            Уже зарегистрирован?{' '}
+            <Link href='/acount/login'>
+              <a className='lead text-primary ms-2'>Войти</a>
+            </Link>
+          </h5>
+        </Col>
+      </Row>
     </Layout>
   )
 }

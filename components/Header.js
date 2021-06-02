@@ -8,7 +8,7 @@ const Header = ({ menu_locale }) => {
   return (
     <header>
       <Navbar bg='light' expand='lg' className='shadow'>
-        <NavbarBrand className='ms-3'>
+        <NavbarBrand className='ms-5'>
           <Link href={`/`}>
             <a>
               <Image
@@ -80,6 +80,18 @@ Header.defaultProps = {
       ru: 'Контакты',
       en: 'Contacts',
       link: '/contacts',
+    },
+    {
+      id: '7e5ad418',
+      ru: 'Регистрация',
+      en: 'Register',
+      link: '/account/register',
+    },
+    {
+      id: '4d2kl432',
+      ru: 'Вход',
+      en: 'Login',
+      link: '/account/login',
     },
   ],
 }

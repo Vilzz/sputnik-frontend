@@ -20,7 +20,7 @@ const Footer = () => {
         <>
           <p>Copyright &copy; Sputnik makets studio 2021</p>
           <p>
-            <Link href={`/${router.locale}/about`}>
+            <Link href={`/about`}>
               <a>About This Project</a>
             </Link>
           </p>

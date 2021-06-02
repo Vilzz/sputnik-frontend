@@ -1,10 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { Card } from 'react-bootstrap'
+
 const MaketCard = ({ maket }) => {
   const router = useRouter()
   return (
-    <div className='card maket-card mb-3' style={{ width: '18rem' }}>
+    <Card className='maket-card mb-3'>
       <Link href={`/catalog/maket/${maket._id}`}>
         <a>
           <Image
@@ -16,14 +18,14 @@ const MaketCard = ({ maket }) => {
         </a>
       </Link>
 
-      <div className='card-body maket-body'>
-        <h4 className='card-title'>
+      <Card.Body className='maket-body'>
+        <Card.Title as='h4'>
           {router.locale === 'ru-RU' ? maket.name : maket.name_en}
-        </h4>
+        </Card.Title>
         <hr />
-        <p className='card-text' style={{ minHeight: '60px' }}>
+        <Card.Text className='maket-desc'>
           {router.locale === 'ru-RU' ? maket.shortdesc : maket.shortdesc_en}
-        </p>
+        </Card.Text>
         <div className='scale-card mb-3'>
           <div>
             <h6>Доступные масштабы: </h6>
@@ -37,8 +39,8 @@ const MaketCard = ({ maket }) => {
             <a className='btn btn-primary'>Подробнее</a>
           </Link>
         </div>
-      </div>
-    </div>
+      </Card.Body>
+    </Card>
   )
 }
 

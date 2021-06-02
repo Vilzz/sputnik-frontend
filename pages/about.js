@@ -9,22 +9,23 @@ const About = () => {
       title={router.locale === 'ru-RU' ? 'О нас' : 'About us'}
       description={
         router.locale === 'ru-RU'
-          ? 'Информация о макетной студии Спутник'
-          : 'About Sputnik maket studio'
+          ? 'Информация о макетной мастерской Спутник'
+          : 'About Sputnik maket workshop'
       }
-      keywords='макеты,сувенирные макеты, макеты космических аппаратов'
+      keywords='макеты,сувенирные макеты, макеты космических аппаратов, фабрика моделей'
     >
       {router.locale === 'ru-RU' ? (
         <div className='row'>
-          <h1 className='my-3'>О макетной компании "Спутник"</h1>
+          <h1 className='my-3 ms-3 text-primary display-5'>
+            О макетной компании "Спутник"
+          </h1>
           <hr />
           <div className='row'>
             <div className='col-12 col-md-4 py-2'>
               <Image
-                src='/images/about_us.jpg'
+                src='/images/about_us_400x600.jpg'
                 width='400px'
                 height='600px'
-                priority='true'
               />
             </div>
             <div className='col-12 col-md-8 py-1 px-5'>
@@ -61,6 +62,7 @@ const About = () => {
           </div>
         </div>
       ) : (
+        // Todo: Добавить описание страници О нас на английском языке
         <h1>About Sputnik company</h1>
       )}
     </Layout>
