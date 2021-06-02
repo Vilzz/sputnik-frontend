@@ -11,17 +11,31 @@ export const AuthProvider = ({ children }) => {
   const router = useRouter()
 
   const register = async (user) => {
-    const res = await axios.post(`${NEXT_URL}api/register`, user)
-    if (!res) {
-      setError(`Error ${res.statusText}`)
-    } else {
+    try {
+      const res = await axios.post(`${NEXT_URL}api/register`, user)
+      //TODO Закончить передачу Данных пользователя в контекст
       router.push('/account/dashboard')
+    } catch (error) {
+      setError(
+        `Статус: ${error.response.status}, Ошибка: ${error.response.data.error}`
+      )
+      setError(null)
     }
-
-    //console.log('From AuthContext', res.data)
+  }
+  const login = async (user) => {
+    try {
+      const res = await axios.post(`${NEXT_URL}api/login`, user)
+      //TODO Закончить передачу Данных пользователя в контекст
+      router.push('/account/dashboard')
+    } catch (error) {
+      setError(
+        `Статус: ${error.response.status}, Ошибка: ${error.response.data.error}`
+      )
+      setError(null)
+    }
   }
   return (
-    <AuthContext.Provider value={{ register, error }}>
+    <AuthContext.Provider value={{ register, login, error }}>
       {children}
     </AuthContext.Provider>
   )

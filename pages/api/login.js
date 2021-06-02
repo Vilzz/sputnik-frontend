@@ -4,7 +4,8 @@ import { API_URL } from '@/config/index.js'
 
 export default async (req, res) => {
   try {
-    const result = await axios.post(`${API_URL}auth/register`, req.body)
+    const result = await axios.post(`${API_URL}auth/login`, req.body)
+
     if (result) {
       res.setHeader(
         'Set-Cookie',
@@ -16,7 +17,7 @@ export default async (req, res) => {
           path: '/',
         })
       )
-      res.status(201).json({
+      res.status(200).json({
         data: result.data,
       })
     }

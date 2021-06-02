@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
 import { ToastContainer, toast } from 'react-toastify'
@@ -8,6 +9,7 @@ import AuthContext from '@/context/AuthContext'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 
 const RegisterPage = () => {
+  const router = useRouter()
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -27,7 +29,13 @@ const RegisterPage = () => {
   }
 
   return (
-    <Layout title='Регистрация пользователя'>
+    <Layout
+      title={
+        router.locale === 'ru-RU'
+          ? 'Регистрация пользователя'
+          : 'Register new user'
+      }
+    >
       <ToastContainer />
       <Row className='py-5'>
         <Col md={{ span: 6, offset: 1 }}>
@@ -87,7 +95,7 @@ const RegisterPage = () => {
           </Form>
           <h5 className='mt-3'>
             Уже зарегистрирован?{' '}
-            <Link href='/acount/login'>
+            <Link href='/account/login'>
               <a className='lead text-primary ms-2'>Войти</a>
             </Link>
           </h5>
