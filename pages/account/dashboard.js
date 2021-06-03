@@ -1,4 +1,5 @@
 import Layout from '@/components/Layout'
+import { parseCookies } from '@/helpers/index'
 
 const Dashboard = () => {
   return (
@@ -9,5 +10,11 @@ const Dashboard = () => {
     </Layout>
   )
 }
-
 export default Dashboard
+
+export const getServerSideProps = async (ctx) => {
+  const { token } = parseCookies(ctx.req)
+  return {
+    props: { token },
+  }
+}
