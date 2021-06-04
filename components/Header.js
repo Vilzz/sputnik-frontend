@@ -72,12 +72,35 @@ const Header = () => {
           <Nav className='ms-3 me-5'>
             {Menu(router.locale)}
             {user ? (
-              <li className='nav-item'>
-                <a className='btn nav-link' onClick={() => logout()}>
-                  {router.locale === 'ru-RU' ? 'Выход' : 'Logout'}
-                </a>
-              </li>
+              // Если пользователь авторизован
+              <>
+                {user.role === 'Admin' ? (
+                  //Если пользователь администратор
+                  <li className='nav-item'>
+                    <Link href='/account/admindashboard'>
+                      <a className='nav-link'>
+                        {router.locale === 'ru-RU' ? 'Панель' : 'Dashboard'}
+                      </a>
+                    </Link>
+                  </li>
+                ) : (
+                  //Если обычный пользователь
+                  <li className='nav-item'>
+                    <Link href='/account/dashboard'>
+                      <a className='nav-link'>
+                        {router.locale === 'ru-RU' ? 'Панель' : 'Dashboard'}
+                      </a>
+                    </Link>
+                  </li>
+                )}
+                <li className='nav-item'>
+                  <a className='btn nav-link' onClick={() => logout()}>
+                    {router.locale === 'ru-RU' ? 'Выход' : 'Logout'}
+                  </a>
+                </li>
+              </>
             ) : (
+              // Не авторизованный пользователь
               <>
                 <li className='nav-item'>
                   <Link href='/account/register'>

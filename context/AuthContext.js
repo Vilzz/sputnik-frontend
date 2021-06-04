@@ -10,6 +10,10 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null)
   const router = useRouter()
 
+  useEffect(() => {
+    checkUser()
+  }, [])
+
   const register = async (user) => {
     try {
       const res = await axios.post(`${NEXT_URL}api/register`, user)
@@ -25,8 +29,13 @@ export const AuthProvider = ({ children }) => {
   const login = async ({ email, password }) => {
     try {
       const res = await axios.post(`${NEXT_URL}api/login`, { email, password })
+      const { role } = res.data.data.user
       setUser(res.data.data.user)
-      router.push('/account/dashboard')
+      if (role === 'Admin') {
+        router.push('/account/admindashboard')
+      } else {
+        router.push('/account/dashboard')
+      }
     } catch (error) {
       setError(
         `Статус: ${error.response.status}, Ошибка: ${error.response.data.error}`
@@ -41,6 +50,20 @@ export const AuthProvider = ({ children }) => {
       router.push('/')
     }
   }
+
+  const checkUser = async () => {
+    try {
+      const res = await axios.get(`${NEXT_URL}api/user`)
+      console.log(res)
+      if (res) {
+        setUser(res.data.data.user)
+      }
+    } catch (error) {
+      console.log(error)
+      setUser(null)
+    }
+  }
+
   return (
     <AuthContext.Provider value={{ user, register, login, logout, error }}>
       {children}

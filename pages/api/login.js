@@ -1,6 +1,6 @@
 import cookie from 'cookie'
 import axios from 'axios'
-import { API_URL } from '@/config/index.js'
+import { API_URL } from '@/config/index'
 
 export default async (req, res) => {
   try {
@@ -17,7 +17,7 @@ export default async (req, res) => {
           path: '/',
         })
       )
-      res.status(200).json({
+      res.status(result.status).json({
         data: result.data,
       })
     }

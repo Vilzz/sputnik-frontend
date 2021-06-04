@@ -1,16 +1,16 @@
 import Layout from '@/components/Layout'
 import { parseCookies } from '@/helpers/index'
 
-const Dashboard = () => {
+const AdminDashboard = () => {
   return (
     <Layout title='Панель управления'>
       <div>
-        <h1>DAshBoard</h1>
+        <h1>Панель Администратора</h1>
       </div>
     </Layout>
   )
 }
-export default Dashboard
+export default AdminDashboard
 
 export const getServerSideProps = async (ctx) => {
   const { token } = parseCookies(ctx.req) || ''
