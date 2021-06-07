@@ -85,3 +85,10 @@ a {
   justify-content: space-between;
   
 }
+th{
+  font-size: 0.7rem;
+  text-align: center;
+  }
+  td{
+    font-size: 0.7rem;
+  }

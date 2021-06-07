@@ -1,7 +1,15 @@
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import Layout from '@/components/Layout'
 import { parseCookies } from '@/helpers/index'
 
-const Dashboard = () => {
+const Dashboard = ({ token }) => {
+  const router = useRouter()
+  useEffect(() => {
+    if (token === null) {
+      router.push('/account/login')
+    }
+  }, [token])
   return (
     <Layout title='Панель управления'>
       <div>
@@ -13,8 +21,8 @@ const Dashboard = () => {
 export default Dashboard
 
 export const getServerSideProps = async (ctx) => {
-  const { token } = parseCookies(ctx.req) || ''
+  const res = parseCookies(ctx.req)
   return {
-    props: { token },
+    props: { token: res.token },
   }
 }

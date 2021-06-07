@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
       const { role } = res.data.data.user
       setUser(res.data.data.user)
       if (role === 'Admin') {
-        router.push('/account/admindashboard')
+        router.push('/admin/category')
       } else {
         router.push('/account/dashboard')
       }
@@ -54,9 +54,8 @@ export const AuthProvider = ({ children }) => {
   const checkUser = async () => {
     try {
       const res = await axios.get(`${NEXT_URL}api/user`)
-      console.log(res)
       if (res) {
-        setUser(res.data.data.user)
+        setUser(res.data.data)
       }
     } catch (error) {
       console.log(error)

@@ -9,12 +9,14 @@ export default async (req, res) => {
       return
     }
     const { token } = cookie.parse(req.headers.cookie)
+
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     }
     const apiRes = await axios.get(`${API_URL}auth/me`, config)
+
     if (apiRes) {
       res.status(200).json(apiRes.data)
     } else {

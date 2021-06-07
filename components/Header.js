@@ -8,6 +8,7 @@ import { Nav, Navbar, NavbarBrand } from 'react-bootstrap'
 const Header = () => {
   const { user, logout } = useContext(AuthContext)
   const router = useRouter()
+
   const Menu = (locale) => {
     return (
       <>
@@ -77,7 +78,7 @@ const Header = () => {
                 {user.role === 'Admin' ? (
                   //Если пользователь администратор
                   <li className='nav-item'>
-                    <Link href='/account/admindashboard'>
+                    <Link href='/admin/category'>
                       <a className='nav-link'>
                         {router.locale === 'ru-RU' ? 'Панель' : 'Dashboard'}
                       </a>
