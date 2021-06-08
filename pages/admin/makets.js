@@ -1,7 +1,9 @@
 import Layout from '@/components/Layout'
 import AdminPanelMenu from '@/components/AdminPanelMenu'
 import { Row, Col } from 'react-bootstrap'
-const Makets = () => {
+import AdminRoutesProtection from '@/components/AdminRoutesProtection'
+import { parseCookies } from '@/helpers/index'
+const Makets = ({ token }) => {
   return (
     <Layout>
       <Row>
@@ -17,13 +19,12 @@ const Makets = () => {
   )
 }
 
-export default Makets
+export default AdminRoutesProtection(Makets)
 
-// export const getServerSideProps = async () => {
-//   const res = await axios.get(`${API_URL}categories`)
-//   return {
-//     props: {
-//       categories: res.data.data,
-//     },
-//   }
-// }
+export const getServerSideProps = async (ctx) => {
+  const res = parseCookies(ctx.req)
+
+  return {
+    props: { token: res.token },
+  }
+}

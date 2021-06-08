@@ -1,20 +1,12 @@
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
 import axios from 'axios'
 import { API_URL } from '@/config/index'
+import AdminRoutesProtection from '@/components/AdminRoutesProtection'
 import Layout from '@/components/Layout'
 import AdminPanelMenu from '@/components/AdminPanelMenu'
 import Categories from '@/components/Categories'
 import { parseCookies } from '@/helpers/index'
 import { Row, Col } from 'react-bootstrap'
 const Category = ({ categories, token }) => {
-  const router = useRouter()
-  //@TODO Check for user role is Admin if not push to user dashboard
-  useEffect(() => {
-    if (token === null) {
-      router.push('/account/login')
-    }
-  }, [token])
   return (
     <Layout>
       <Row>
@@ -31,7 +23,7 @@ const Category = ({ categories, token }) => {
   )
 }
 
-export default Category
+export default AdminRoutesProtection(Category)
 
 export const getServerSideProps = async (ctx) => {
   const res = parseCookies(ctx.req)

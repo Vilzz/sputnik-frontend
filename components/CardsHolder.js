@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Head from 'next/head'
 import MaketCard from './MaketCard'
 
 const CardsHolder = ({ category }) => {

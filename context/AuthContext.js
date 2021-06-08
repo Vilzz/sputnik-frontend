@@ -58,7 +58,10 @@ export const AuthProvider = ({ children }) => {
         setUser(res.data.data)
       }
     } catch (error) {
-      console.log(error)
+      setError(
+        `Статус: ${error.response.status}, Ошибка: ${error.response.data.message}`
+      )
+      setError(null)
       setUser(null)
     }
   }

@@ -1,17 +1,20 @@
 import { Table } from 'react-bootstrap'
 import Image from 'next/image'
+import { GoGear, GoTrashcan } from 'react-icons/go'
+import Link from 'next/link'
 const Categories = ({ categories }) => {
   return (
     <Table striped bordered responsive size='sm'>
       <thead>
         <tr>
-          <th>Наименование</th>
-          <th>Наименование англ</th>
+          <th>Имя</th>
+          <th>Имя англ</th>
           <th>Описание</th>
           <th>Описание англ</th>
-          <th>Изображение</th>
-          <th>Порядоковый номер</th>
-          <th>Показывать в меню</th>
+          <th>Фото</th>
+          <th>Сортировка</th>
+          <th>Показать</th>
+          <th>Упр</th>
         </tr>
       </thead>
       <tbody>
@@ -25,7 +28,18 @@ const Categories = ({ categories }) => {
               <Image src={category.image} width='50px' height='50px' />
             </td>
             <td>{category.order}</td>
-            <td>{category.showinmenu.toString()}</td>
+            <td>{category.showinmenu ? 'Да' : 'Нет'}</td>
+            <td className='d-flex'>
+              <Link href={`/admin/category/${category._id}`}>
+                <a className='btn btn-xs btn-primary me-1'>
+                  <GoGear />
+                </a>
+              </Link>
+
+              <button className='btn btn-xs btn-danger'>
+                <GoTrashcan />
+              </button>
+            </td>
           </tr>
         ))}
       </tbody>

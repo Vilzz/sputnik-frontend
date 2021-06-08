@@ -85,6 +85,9 @@ a {
   justify-content: space-between;
   
 }
+.btn-xs{
+  padding: 1px 4px;
+}
 th{
   font-size: 0.7rem;
   text-align: center;
