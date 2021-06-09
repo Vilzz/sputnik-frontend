@@ -14,7 +14,7 @@ const Category = ({ categories, token }) => {
           <AdminPanelMenu title={'Категории'} />
         </Col>
         <Col md={9}>
-          <h2 className='text-left text-primary'>Панель Администратора</h2>
+          <h2 className='text-left text-primary'>Список категорий</h2>
           <hr />
           <Categories categories={categories} />
         </Col>

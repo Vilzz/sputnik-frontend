@@ -11,7 +11,7 @@ const Makets = ({ token }) => {
           <AdminPanelMenu title={'Макеты'} />
         </Col>
         <Col md={9}>
-          <h1 className='text-center'>Панель Администратора</h1>
+          <h1 className='text-center'>Список макетов</h1>
           <hr />
         </Col>
       </Row>
