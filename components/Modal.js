@@ -14,11 +14,12 @@ const Modal = ({ show, onClose, children, title }) => {
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <div className={styles.header}>
+          {title && <div>{title}</div>}
           <a href='!#' onClick={handleClose}>
             <FaTimes />
           </a>
         </div>
-        {title && <div>{title}</div>}
+        <hr />
         <div className={styles.body}>{children}</div>
       </div>
     </div>

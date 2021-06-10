@@ -1,23 +1,30 @@
 import { useState } from 'react'
+import axios from 'axios'
 import { API_URL } from '@/config/index'
 import styles from '@/styles/Form.module.css'
 import { Form, Button } from 'react-bootstrap'
 
-const ImageUpload = ({ catId, imageUploaded }) => {
+const ImageUpload = ({ catId, imageUploaded, token }) => {
   const [image, setImage] = useState(null)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
     const formData = new FormData()
-    formData.append('files', image)
+    formData.append('file', image)
+    formData.append('folder', 'categories')
+    const res = await axios.post(`${API_URL}images`, formData, config)
+    console.log(res)
   }
   const handleFileChange = (e) => {
     setImage(e.target.files[0])
   }
   return (
     <div className={styles.form}>
-      {catId}
-      <h1>Загрузить изображение</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId='formFile' className='mb-3'>
           <Form.Label>Выбери изображение</Form.Label>

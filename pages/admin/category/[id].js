@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import fs from 'fs'
 import axios from 'axios'
 import Modal from '@/components/Modal'
 import { FaRegSun, FaImage, FaRegSave, FaList } from 'react-icons/fa'
@@ -9,9 +10,9 @@ import ImageUpload from '@/components/ImageUpload'
 import { API_URL } from '@/config/index'
 import AdminRoutesProtection from '@/components/AdminRoutesProtection'
 import { parseCookies } from '@/helpers/index'
-import { Col, Form, Button } from 'react-bootstrap'
+import { Col, Form, Button, FormGroup, FormControl } from 'react-bootstrap'
 
-const CategoryEdit = ({ token, category }) => {
+const CategoryEdit = ({ token, category, filenames }) => {
   const [categoryData, setCategoryData] = useState({
     name: category.name,
     name_en: category.name_en,
@@ -32,13 +33,13 @@ const CategoryEdit = ({ token, category }) => {
     e.preventDefault()
     console.log(categoryData)
   }
-  const imageUploaded = () => {
-    console.log('UPLOADED')
+  const imageUploaded = (e) => {
+    console.log(e.target)
   }
   return (
     <Layout>
       <Col
-        md={{ offset: 1, span: 2 }}
+        md={{ span: 4 }}
         className='d-flex justify-content-evenly align-items-center flex-column'
       >
         <h3>Изображение</h3>
@@ -49,12 +50,26 @@ const CategoryEdit = ({ token, category }) => {
             <p>Изображение не загружено</p>
           </div>
         )}
+        <div className='d-flex justify-content-evenly flex-wrap'>
+          {filenames.map((file) => (
+            <Button
+              size='sm'
+              key={file}
+              className='mb-1'
+              variant='outline-warning'
+              onClick={() => setImage(`/images/icons/${file}`)}
+            >
+              <Image src={`/images/icons/${file}`} width={30} height={30} />
+            </Button>
+          ))}
+        </div>
+
         <Button
           type='button'
           onClick={() => setShowModal(true)}
           className='btn-primary btn-icon my-4'
         >
-          <FaImage className='me-1' /> Изменить
+          <FaImage className='me-1' /> Загрузить
         </Button>
       </Col>
       <Col md={{ offset: 1, span: 6 }}>
@@ -149,8 +164,16 @@ const CategoryEdit = ({ token, category }) => {
           </Link>
         </Form>
       </Col>
-      <Modal show={showModal} onClose={() => setShowModal(false)}>
-        <ImageUpload catId={category._id} imageUploaded={imageUploaded} />
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        title={'Загрузить изображение'}
+      >
+        <ImageUpload
+          catId={category._id}
+          imageUploaded={imageUploaded}
+          token={token}
+        />
       </Modal>
     </Layout>
   )
@@ -161,7 +184,9 @@ export default AdminRoutesProtection(CategoryEdit)
 export const getServerSideProps = async (ctx) => {
   const res = parseCookies(ctx.req)
   const category = await axios.get(`${API_URL}categories/${ctx.query.id}`)
+  const filenames = fs.readdirSync('./public/images/icons')
+
   return {
-    props: { token: res.token, category: category.data.data },
+    props: { token: res.token, category: category.data.data, filenames },
   }
 }
