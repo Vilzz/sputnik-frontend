@@ -4,7 +4,7 @@ import { API_URL } from '@/config/index'
 import styles from '@/styles/Form.module.css'
 import { Form, Button } from 'react-bootstrap'
 
-const ImageUpload = ({ catId, imageUploaded, token }) => {
+const ImageUpload = ({ imageUploaded, token, onClose }) => {
   const [image, setImage] = useState(null)
 
   const handleSubmit = async (e) => {
@@ -17,8 +17,13 @@ const ImageUpload = ({ catId, imageUploaded, token }) => {
     const formData = new FormData()
     formData.append('file', image)
     formData.append('folder', 'categories')
-    const res = await axios.post(`${API_URL}images`, formData, config)
-    console.log(res)
+    try {
+      const res = await axios.post(`${API_URL}images`, formData, config)
+      imageUploaded(res.data)
+    } catch (error) {
+      imageUploaded(error.response.data)
+    }
+    onClose()
   }
   const handleFileChange = (e) => {
     setImage(e.target.files[0])

@@ -6,6 +6,7 @@ import AdminPanelMenu from '@/components/AdminPanelMenu'
 import Categories from '@/components/Categories'
 import { parseCookies } from '@/helpers/index'
 import { Row, Col } from 'react-bootstrap'
+
 const Category = ({ categories, token }) => {
   return (
     <Layout>

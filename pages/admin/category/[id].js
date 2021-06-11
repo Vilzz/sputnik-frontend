@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import fs from 'fs'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import Modal from '@/components/Modal'
 import { FaRegSun, FaImage, FaRegSave, FaList } from 'react-icons/fa'
 import Layout from '@/components/Layout'
@@ -10,9 +13,12 @@ import ImageUpload from '@/components/ImageUpload'
 import { API_URL } from '@/config/index'
 import AdminRoutesProtection from '@/components/AdminRoutesProtection'
 import { parseCookies } from '@/helpers/index'
-import { Col, Form, Button, FormGroup, FormControl } from 'react-bootstrap'
-
+import { Col, Form, Button } from 'react-bootstrap'
+//******************************************************** */
+//@TODO Изменить место загрузки картинки на сервер NEXTjs
+//******************************************************* */
 const CategoryEdit = ({ token, category, filenames }) => {
+  const router = useRouter()
   const [categoryData, setCategoryData] = useState({
     name: category.name,
     name_en: category.name_en,
@@ -29,15 +35,37 @@ const CategoryEdit = ({ token, category, filenames }) => {
     setCategoryData({ ...categoryData, [e.target.name]: e.target.value })
   }
 
-  const updateCategory = (e) => {
+  const updateCategory = async (e) => {
     e.preventDefault()
-    console.log(categoryData)
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const res = await axios.put(
+        `${API_URL}categories/${category._id}`,
+        { ...categoryData, image },
+        config
+      )
+      toast.success('Данные категории обновлены')
+      setTimeout(() => router.push('/admin/category'), 1500)
+    } catch (error) {
+      toast.error(
+        `Ошибка: ${error.response.status} ${error.response.data.error})`
+      )
+    }
   }
-  const imageUploaded = (e) => {
-    console.log(e.target)
+  const imageUploaded = (text) => {
+    if (text.success) {
+      toast.success(`Изображение добавлено ${text.data}`)
+    } else {
+      toast.error(`Ошибка: ${text.error}`)
+    }
   }
   return (
     <Layout>
+      <ToastContainer />
       <Col
         md={{ span: 4 }}
         className='d-flex justify-content-evenly align-items-center flex-column'
@@ -170,8 +198,8 @@ const CategoryEdit = ({ token, category, filenames }) => {
         title={'Загрузить изображение'}
       >
         <ImageUpload
-          catId={category._id}
           imageUploaded={imageUploaded}
+          onClose={() => setShowModal(false)}
           token={token}
         />
       </Modal>
