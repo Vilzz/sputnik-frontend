@@ -49,7 +49,7 @@ const CategoryEdit = ({ token, category, filenames }) => {
         config
       )
       toast.success('Данные категории обновлены')
-      setTimeout(() => router.push('/admin/category'), 1500)
+      setTimeout(() => router.push('/admin/category'), 1000)
     } catch (error) {
       toast.error(
         `Ошибка: ${error.response.status} ${error.response.data.error})`

@@ -21,9 +21,11 @@ const Catalog = ({ categories }) => {
       </h1>
       <hr />
       <div className='d-flex justify-content-evenly align-items-center flex-wrap g-5 my-4'>
-        {categories.map((category) => (
-          <CategoryCard category={category} key={category._id} />
-        ))}
+        {categories
+          .filter((category) => category.showinmenu === true)
+          .map((category) => (
+            <CategoryCard category={category} key={category._id} />
+          ))}
       </div>
     </Layout>
   )

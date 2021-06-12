@@ -89,9 +89,10 @@ a {
   padding: 1px 4px;
 }
 th{
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   text-align: center;
   }
-  td{
+td{
     font-size: 0.7rem;
+    font-weight: bold;
   }
