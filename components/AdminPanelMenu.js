@@ -12,6 +12,17 @@ const AdminPanelMenu = ({ title }) => {
       <ul className='list-group list-group-flush'>
         <li
           className={
+            router.pathname === '/admin/category/create'
+              ? 'list-group-item d-flex justify-content-between align-items-start active'
+              : 'list-group-item d-flex justify-content-between align-items-start'
+          }
+        >
+          <Link href='/admin/category/create'>
+            <a className='sidemenu-link'>Создать категорию</a>
+          </Link>
+        </li>
+        <li
+          className={
             router.pathname === '/admin/category'
               ? 'list-group-item d-flex justify-content-between align-items-start active'
               : 'list-group-item d-flex justify-content-between align-items-start'

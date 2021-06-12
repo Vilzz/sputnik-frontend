@@ -1,13 +1,14 @@
-import { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-
 import AuthContext from '@/context/AuthContext'
 
 const AdminRoutesProtection = (WrappedComponent) => {
   return (props) => {
+    const [isBrowser, setIsBrowser] = useState(false)
+    useEffect(() => setIsBrowser(true), [])
     const router = useRouter()
     const { user } = useContext(AuthContext)
-    if (typeof window !== 'undefined') {
+    if (isBrowser) {
       if (props.token === null) {
         router.replace('/account/login')
         return null
@@ -22,5 +23,4 @@ const AdminRoutesProtection = (WrappedComponent) => {
     return null
   }
 }
-
 export default AdminRoutesProtection
