@@ -34,6 +34,17 @@ const AdminPanelMenu = ({ title }) => {
         </li>
         <li
           className={
+            router.pathname === '/admin/makets/create'
+              ? 'list-group-item d-flex justify-content-between align-items-start active'
+              : 'list-group-item d-flex justify-content-between align-items-start'
+          }
+        >
+          <Link href='/admin/makets/create'>
+            <a className='sidemenu-link'>Создать макет</a>
+          </Link>
+        </li>
+        <li
+          className={
             router.pathname === '/admin/makets'
               ? 'list-group-item d-flex justify-content-between align-items-start active'
               : 'list-group-item d-flex justify-content-between align-items-start'

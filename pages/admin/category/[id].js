@@ -160,7 +160,8 @@ const CategoryEdit = ({ token, category, filenames }) => {
               type='number'
               name='order'
               value={categoryData.order}
-              required
+              disabled={category._id === '60c594a53347701fc71ccf5f'}
+              required={category._id !== '60c594a53347701fc71ccf5f'}
               onChange={(e) => onChange(e)}
             />
           </Form.Group>
@@ -168,6 +169,7 @@ const CategoryEdit = ({ token, category, filenames }) => {
             className='form-switch'
             type='checkbox'
             label='Показать в меню'
+            disabled={category._id === '60c594a53347701fc71ccf5f'}
             checked={categoryData.showinmenu}
             onChange={(e) =>
               setCategoryData({
@@ -176,7 +178,12 @@ const CategoryEdit = ({ token, category, filenames }) => {
               })
             }
           />
-          <Button size='lg' className='mt-3' type='submit'>
+          <Button
+            size='lg'
+            className='mt-3'
+            type='submit'
+            disabled={category._id === '60c594a53347701fc71ccf5f'}
+          >
             <FaRegSave className='me-2' />
             Сохранить
           </Button>

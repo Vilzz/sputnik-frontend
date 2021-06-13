@@ -17,7 +17,7 @@ const Category = ({ categories, token }) => {
         <Col md={9}>
           <h2 className='text-left text-primary'>Список категорий</h2>
           <hr />
-          <Categories categories={categories} />
+          <Categories categories={categories} token={token} />
         </Col>
       </Row>
     </Layout>
@@ -28,7 +28,7 @@ export default AdminRoutesProtection(Category)
 
 export const getServerSideProps = async (ctx) => {
   const res = parseCookies(ctx.req)
-  const categories = await axios.get(`${API_URL}categories`)
+  const categories = await axios.get(`${API_URL}categories?sort=order`)
   return {
     props: { categories: categories.data.data, token: res.token },
   }

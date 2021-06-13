@@ -25,7 +25,7 @@ const CreateCategory = ({ token, filenames }) => {
     description: '',
     description_en: '',
     order: '',
-    showinmenu: '',
+    showinmenu: false,
   })
   const [image, setImage] = useState('')
 
