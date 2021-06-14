@@ -35,6 +35,28 @@ const CreateMaket = ({ token, maketImages, categories }) => {
   const handleChange = (e) => {
     setMaketData({ ...maketData, [e.target.name]: e.target.value })
   }
+  const checkBoxChange = (e) => {
+    const scalesArray = scales
+    const sortScales = (a, b) => {
+      if (parseInt(a.slice(2)) > parseInt(b.slice(2))) {
+        return -1
+      }
+      if (parseInt(a.slice(2)) < parseInt(b.slice(2))) {
+        return 1
+      }
+      return 0
+    }
+    if (e.target.checked) {
+      scalesArray.push(e.target.name)
+      setScales([...scalesArray.sort(sortScales)])
+    } else {
+      setScales([
+        ...scalesArray
+          .filter((scale) => scale !== e.target.name)
+          .sort(sortScales),
+      ])
+    }
+  }
   return (
     <Layout>
       <ToastContainer />
@@ -49,7 +71,52 @@ const CreateMaket = ({ token, maketImages, categories }) => {
 
       <Form onSubmit={(e) => handleSubmit(e)}>
         <Row className='justify-content-md-start mb-3'>
-          <Col md={{ span: 4, offset: 1 }}>
+          <Col md={{ span: 7, offset: 1 }}>
+            <Form.Label className='me-3'>Выбери масштабы: </Form.Label>
+            <Form.Check
+              inline
+              type='checkbox'
+              label='1:250'
+              name='1:250'
+              onChange={(e) => checkBoxChange(e)}
+            />
+            <Form.Check
+              inline
+              type='checkbox'
+              label='1:144'
+              name='1:144'
+              onChange={(e) => checkBoxChange(e)}
+            />
+            <Form.Check
+              inline
+              type='checkbox'
+              label='1:100'
+              name='1:100'
+              onChange={(e) => checkBoxChange(e)}
+            />
+            <Form.Check
+              inline
+              type='checkbox'
+              label='1:72'
+              name='1:72'
+              onChange={(e) => checkBoxChange(e)}
+            />
+            <Form.Check
+              inline
+              type='checkbox'
+              label='1:50'
+              name='1:50'
+              onChange={(e) => checkBoxChange(e)}
+            />
+            <Form.Check
+              inline
+              type='checkbox'
+              label='1:25'
+              name='1:25'
+              onChange={(e) => checkBoxChange(e)}
+            />
+          </Col>
+          <Col>
             <Form.Check
               className='form-switch'
               type='checkbox'
