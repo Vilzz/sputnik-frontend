@@ -15,9 +15,11 @@ const CardsHolder = ({ category }) => {
       </div>
       <hr />
       <div className='d-flex flex-wrap justify-content-evenly align-items-start'>
-        {category.makets.map((maket) => (
-          <MaketCard maket={maket} key={maket._id} />
-        ))}
+        {category.makets
+          .filter((maket) => maket.published === true)
+          .map((maket) => (
+            <MaketCard maket={maket} key={maket._id} />
+          ))}
       </div>
     </div>
   )

@@ -7,16 +7,20 @@ const MaketCard = ({ maket }) => {
   const router = useRouter()
   return (
     <Card className='maket-card mb-3'>
-      <Link href={`/catalog/maket/${maket._id}`}>
-        <a>
-          <Image
-            src={maket.images[0]}
-            width='300px'
-            height='450px'
-            alt={maket.name}
-          />
-        </a>
-      </Link>
+      {maket.images.length > 0 ? (
+        <Link href={`/catalog/maket/${maket._id}`}>
+          <a>
+            <Image
+              src={maket.images[0]}
+              width='300px'
+              height='450px'
+              alt={maket.name}
+            />
+          </a>
+        </Link>
+      ) : (
+        <h6>No Image</h6>
+      )}
 
       <Card.Body className='maket-body'>
         <Card.Title as='h4'>

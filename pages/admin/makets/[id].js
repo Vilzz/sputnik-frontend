@@ -12,8 +12,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import { parseCookies } from '@/helpers/index'
 import { API_URL } from '@/config/index'
 import { Form, Col, Row, Button } from 'react-bootstrap'
-
-const CreateMaket = ({ token, maketImages, categories }) => {
+//@TODO Изменить компонент для редактирования макета
+const EditMaket = ({ token, maketImages, categories }) => {
   const router = useRouter()
   const [maketData, setMaketData] = useState({
     name: '',
@@ -89,7 +89,7 @@ const CreateMaket = ({ token, maketImages, categories }) => {
       <Row>
         <Col md={{ span: 10, offset: 1 }}>
           <h1 className='text-primary mb-3'>
-            <FaPlus /> Создать макет
+            <FaPlus /> Редактировать макет
           </h1>
           <hr />
         </Col>
@@ -342,7 +342,7 @@ const CreateMaket = ({ token, maketImages, categories }) => {
   )
 }
 
-export default AdminRoutesProtection(CreateMaket)
+export default AdminRoutesProtection(EditMaket)
 
 export const getServerSideProps = async (ctx) => {
   const res = parseCookies(ctx.req)

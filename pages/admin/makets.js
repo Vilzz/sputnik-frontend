@@ -1,9 +1,11 @@
+import axios from 'axios'
+import { Row, Col } from 'react-bootstrap'
 import Layout from '@/components/Layout'
 import AdminPanelMenu from '@/components/AdminPanelMenu'
-import { Row, Col } from 'react-bootstrap'
+import MaketsList from '@/components/MaketsList'
 import AdminRoutesProtection from '@/components/AdminRoutesProtection'
 import { parseCookies } from '@/helpers/index'
-import axios from 'axios'
+
 import { API_URL } from '@/config/index'
 const Makets = ({ token, makets }) => {
   return (
@@ -13,8 +15,9 @@ const Makets = ({ token, makets }) => {
           <AdminPanelMenu title={'Макеты'} />
         </Col>
         <Col md={9}>
-          <h1 className='text-center'>Список макетов</h1>
+          <h2 className='text-left text-primary'>Список макетов</h2>
           <hr />
+          <MaketsList token={token} makets={makets} />
         </Col>
       </Row>
     </Layout>

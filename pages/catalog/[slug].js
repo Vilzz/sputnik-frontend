@@ -34,7 +34,13 @@ export const getServerSideProps = async (ctx) => {
   const sideMenuItems = res.data.data
     .filter((item) => item.showinmenu === true)
     .map(({ _id, name, name_en, slug, makets }) => {
-      return { id: _id, name, name_en, slug, maketsLength: makets.length }
+      return {
+        id: _id,
+        name,
+        name_en,
+        slug,
+        maketsLength: makets.filter((maket) => maket.published === true).length,
+      }
     })
   const category = res.data.data.filter(
     (item) => item.slug === ctx.query.slug
