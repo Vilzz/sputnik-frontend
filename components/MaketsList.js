@@ -1,17 +1,39 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import axios from 'axios'
+import { API_URL } from '@/config/index'
 import { Row, Col, Badge, Button } from 'react-bootstrap'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { GoGear, GoTrashcan } from 'react-icons/go'
 import { RiPriceTag2Line } from 'react-icons/ri'
 
 const MaketsList = ({ makets, token }) => {
   const router = useRouter()
+  const deleteMaket = async (e) => {
+    const maketId = e.target.attributes.data.value
+    if (confirm(`Будет удален макет! Вы уверены?`)) {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+        await axios.delete(`${API_URL}makets/${maketId}`, config)
+        toast.success(`Макет удален успешно`)
+        router.push('/admin/makets')
+      } catch (error) {
+        toast.error(`${error.response.data.error}`)
+      }
+    }
+  }
   return (
     <>
+      <ToastContainer />
       {makets.map((maket) => (
-        <Row className='mb-4' key={maket._id}>
-          <Col md={4}>
+        <Row className='mb-4 maket-unit' key={maket._id}>
+          <Col md={4} lg={3}>
             {maket.images.length > 0 ? (
               <Image src={maket.images[0]} width={220} height={330} />
             ) : (
@@ -23,33 +45,41 @@ const MaketsList = ({ makets, token }) => {
               </div>
             )}
           </Col>
-          <Col md={8} className='py-2'>
-            <p className='d-flex justify-content-between lh-1'>
+          <Col md={8} lg={9} className='py-2 maket-admin'>
+            <div className='lh-2'>
               Наименование:
-              <span className='text-primary fw-bold'>{maket.name}</span>
-            </p>
-            <p className='d-flex justify-content-between lh-1'>
+              <span>{maket.name}</span>
+            </div>
+            <div className='lh-2'>
               Наименование на английском:
-              <span className='text-primary fw-bold'>{maket.name_en}</span>
-            </p>
-            <p className='d-flex justify-content-between lh-1'>
+              <span>{maket.name_en}</span>
+            </div>
+            <div className='lh-2'>
               Краткое описание:
-              <span className='text-primary'>{maket.shortdesc}</span>
-            </p>
-            <p className='d-flex justify-content-between lh-1'>
+              <span>{maket.shortdesc}</span>
+            </div>
+            <div className='lh-2'>
               Краткое описание на английском:
-              <span className='text-primary'>{maket.shortdesc_en}</span>
-            </p>
-            <p className='lh-sm text-truncate'>
-              Описание: <br />
-              <span className='text-primary'>{maket.description}</span>
-            </p>
-            <p className='lh-sm text-truncate'>
-              Описание на английском: <br />
-              <span className='text-primary'>{maket.description_en}</span>
-            </p>
+              <span>{maket.shortdesc_en}</span>
+            </div>
+            <div className='lh-2 text-truncate maket-description'>
+              Описание:
+              <span className='px-3'>{maket.description}</span>
+            </div>
+            <div className='lh-2 text-truncate maket-description'>
+              Описание на английском:
+              <span className='px-3'>{maket.description_en}</span>
+            </div>
+            <div className='lh-2'>
+              Ключевые слова
+              <span>{maket.keywords.join(',')}</span>
+            </div>
+            <div className='lh-2 mb-2'>
+              Ключевые слова на англ.
+              <span>{maket.keywords_en.join(',')}</span>
+            </div>
             <Row className='d-flex justify-content-evenly'>
-              <Col md={7}>
+              <Col md={6}>
                 Масштабы:
                 {maket.scales.length > 0 &&
                   maket.scales.map((scale) => (
@@ -62,27 +92,32 @@ const MaketsList = ({ makets, token }) => {
                     </Badge>
                   ))}
               </Col>
-              <Col md={5} className='pt-2 pt-md-0'>
+              <Col md={6} className='px-5 pt-2 pt-md-0'>
                 Опубликовано:
                 {maket.published ? (
-                  <div className='badge bg-success mx-2'>ДА</div>
+                  <Badge className='bg-success'>ДА</Badge>
                 ) : (
-                  <div className='badge bg-danger mx-2'>НЕТ</div>
+                  <Badge className='bg-danger'>НЕТ</Badge>
                 )}
               </Col>
             </Row>
+            <hr />
             <div className='d-flex justify-content-center mt-3'>
               <Link href={`/admin/makets/${maket._id}/prices`}>
-                <a className='btn btn-sm btn-warning me-2'>
+                <a className='btn btn-warning me-2'>
                   <RiPriceTag2Line /> Цены
                 </a>
               </Link>
               <Link href={`/admin/makets/${maket._id}`}>
-                <a className='btn btn-sm btn-primary me-2'>
+                <a className='btn btn-primary me-2'>
                   <GoGear /> Изменить
                 </a>
               </Link>
-              <Button variant='danger' data={maket._id} size='sm'>
+              <Button
+                variant='danger'
+                data={maket._id}
+                onClick={(e) => deleteMaket(e)}
+              >
                 <GoTrashcan /> Удалить
               </Button>
             </div>

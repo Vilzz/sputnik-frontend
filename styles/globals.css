@@ -68,6 +68,26 @@ a {
   font-style: italic;
   min-height: 60px;
 }
+.maket-unit{
+  padding:10px 0;
+  border: 1px solid lightslategrey;
+  border-radius: 10px;
+}
+.maket-admin div{
+  display: flex;
+  justify-content: space-between;
+}
+.maket-admin>div>span{
+  color:#212529;
+  font-weight: bold;
+}
+.maket-description{
+  display: flex;
+  flex-direction: column;
+}
+.maket-admin div>span{
+  font-size: 13px;
+}
 .scale-badge,.category-badge{
   color: white;
   font-weight: 600;
@@ -93,6 +113,8 @@ th{
   text-align: center;
   }
 td{
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: bold;
+    text-align: center;
+    color: darkblue;
   }

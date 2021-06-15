@@ -35,9 +35,15 @@ const Categories = ({ categories, token }) => {
   return (
     <>
       <ToastContainer />
-      <Table striped bordered responsive size='sm'>
+      <Table
+        striped
+        bordered
+        responsive
+        size='sm'
+        className='table-primary  table align-middle'
+      >
         <thead>
-          <tr>
+          <tr className='table-dark'>
             <th>Имя</th>
             <th>Имя англ</th>
             <th>Описание</th>
@@ -67,13 +73,12 @@ const Categories = ({ categories, token }) => {
                 )}
                 <td>{category.order}</td>
                 <td>{category.showinmenu ? 'Да' : 'Нет'}</td>
-                <td className='d-flex'>
+                <td>
                   <Link href={`/admin/category/${category._id}`}>
                     <a className='btn btn-xs btn-primary me-1'>
                       <GoGear />
                     </a>
                   </Link>
-
                   <button
                     className='btn btn-xs btn-danger'
                     data={category._id}

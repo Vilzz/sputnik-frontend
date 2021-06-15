@@ -2,27 +2,57 @@ import axios from 'axios'
 import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { GoGear, GoTrashcan } from 'react-icons/go'
 import { API_URL } from '@/config/index'
 import AdminRoutesProtection from '@/components/AdminRoutesProtection'
 import Layout from '@/components/Layout'
 import { Row, Col, Table } from 'react-bootstrap'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { parseCookies } from '@/helpers/index'
 
-const Prices = ({ maket }) => {
+const Prices = ({ maket, token }) => {
+  const router = useRouter()
   const formatDate = (date) => {
     return format(new Date(date), 'dd-MM-yyyy')
   }
+  const deletePrice = async (e) => {
+    let id
+    if (e.target.nodeName === 'path') {
+      id = e.target.parentNode.attributes.data.value
+    } else {
+      id = e.target.attributes.data.value
+    }
+    if (confirm(`Будет удалена цена макета! Вы уверены?`)) {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+        await axios.delete(`${API_URL}prices/${id}`, config)
+        toast.success('Цена удалена успешно')
+        setTimeout(() => router.push(`/admin/makets`), 1000)
+      } catch (error) {
+        toast.error(
+          `Ошибка: ${error.response.status} ${error.response.data.error})`
+        )
+      }
+    }
+  }
   return (
     <Layout>
+      <ToastContainer />
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
           <h2 className='text-primary mb-2 ms-2'>
             Цены на макет <span className='fw-bold'>{maket.name}</span>
           </h2>
           {maket.prices.length > 0 ? (
-            <Table striped bordered hover>
+            <Table striped bordered hover className='table-primary'>
               <thead>
-                <tr>
+                <tr className='table-dark'>
                   <th>Масштаб</th>
                   <th>Цена рубли</th>
                   <th>Цена доллары</th>
@@ -59,7 +89,7 @@ const Prices = ({ maket }) => {
                       <button
                         className='btn btn-xs btn-danger'
                         data={price._id}
-                        onClick={(e) => deleteCategory(e)}
+                        onClick={(e) => deletePrice(e)}
                       >
                         <GoTrashcan data={price._id} />
                       </button>
@@ -93,10 +123,12 @@ const Prices = ({ maket }) => {
 export default AdminRoutesProtection(Prices)
 
 export const getServerSideProps = async (ctx) => {
-  const res = await axios.get(`${API_URL}makets/${ctx.query.id}`)
+  const res = parseCookies(ctx.req)
+  const maket = await axios.get(`${API_URL}makets/${ctx.query.id}`)
   return {
     props: {
-      maket: res.data.data,
+      maket: maket.data.data,
+      token: res.token,
     },
   }
 }
