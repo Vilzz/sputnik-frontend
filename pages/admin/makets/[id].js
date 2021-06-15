@@ -13,23 +13,23 @@ import { parseCookies } from '@/helpers/index'
 import { API_URL } from '@/config/index'
 import { Form, Col, Row, Button } from 'react-bootstrap'
 //@TODO Изменить компонент для редактирования макета
-const EditMaket = ({ token, maketImages, categories }) => {
+const EditMaket = ({ token, maketImages, categories, maket }) => {
   const router = useRouter()
   const [maketData, setMaketData] = useState({
-    name: '',
-    name_en: '',
-    shortdesc: '',
-    shortdesc_en: '',
-    description: '',
-    description_en: '',
-    keywords: '',
-    keywords_en: '',
-    prodtime: '',
-    category: '60c594a53347701fc71ccf5f',
-    published: false,
+    name: maket.name,
+    name_en: maket.name_en,
+    shortdesc: maket.shortdesc,
+    shortdesc_en: maket.shortdesc_en,
+    description: maket.description,
+    description_en: maket.description_en,
+    keywords: maket.keywords,
+    keywords_en: maket.keywords_en,
+    prodtime: maket.prodtime,
+    category: maket.category._id,
+    published: maket.published,
   })
-  const [images, setImages] = useState([])
-  const [scales, setScales] = useState([])
+  const [images, setImages] = useState([...maket.images])
+  const [scales, setScales] = useState([...maket.scales])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -40,12 +40,12 @@ const EditMaket = ({ token, maketImages, categories }) => {
           Authorization: `Bearer ${token}`,
         },
       }
-      const res = await axios.post(
-        `${API_URL}makets`,
+      const res = await axios.put(
+        `${API_URL}makets/${maket._id}`,
         { ...maketData, images, scales },
         config
       )
-      toast.success('Макет создан успешно')
+      toast.success('Макет изменен успешно')
       setTimeout(() => router.push('/admin/makets'), 1000)
     } catch (error) {
       toast.error(
@@ -53,12 +53,17 @@ const EditMaket = ({ token, maketImages, categories }) => {
       )
     }
   }
+  const keywordsChange = (e) => {
+    const arr = e.target.value.split(',')
+    setMaketData({ ...maketData, [e.target.name]: [...arr] })
+  }
+
   const handleChange = (e) => {
     setMaketData({ ...maketData, [e.target.name]: e.target.value })
   }
 
   const imageSelected = (e) => {
-    setImages([`/images/makets/${e.target.value}`])
+    setImages([e.target.value])
   }
 
   const checkBoxChange = (e) => {
@@ -105,6 +110,7 @@ const EditMaket = ({ token, maketImages, categories }) => {
                 type='checkbox'
                 label='1:250'
                 name='1:250'
+                checked={scales.includes('1:250')}
                 onChange={(e) => checkBoxChange(e)}
               />
               <Form.Check
@@ -112,6 +118,7 @@ const EditMaket = ({ token, maketImages, categories }) => {
                 type='checkbox'
                 label='1:144'
                 name='1:144'
+                checked={scales.includes('1:144')}
                 onChange={(e) => checkBoxChange(e)}
               />
               <Form.Check
@@ -119,6 +126,7 @@ const EditMaket = ({ token, maketImages, categories }) => {
                 type='checkbox'
                 label='1:100'
                 name='1:100'
+                checked={scales.includes('1:100')}
                 onChange={(e) => checkBoxChange(e)}
               />
               <Form.Check
@@ -126,6 +134,7 @@ const EditMaket = ({ token, maketImages, categories }) => {
                 type='checkbox'
                 label='1:72'
                 name='1:72'
+                checked={scales.includes('1:72')}
                 onChange={(e) => checkBoxChange(e)}
               />
               <Form.Check
@@ -133,6 +142,7 @@ const EditMaket = ({ token, maketImages, categories }) => {
                 type='checkbox'
                 label='1:50'
                 name='1:50'
+                checked={scales.includes('1:50')}
                 onChange={(e) => checkBoxChange(e)}
               />
               <Form.Check
@@ -140,6 +150,7 @@ const EditMaket = ({ token, maketImages, categories }) => {
                 type='checkbox'
                 label='1:25'
                 name='1:25'
+                checked={scales.includes('1:25')}
                 onChange={(e) => checkBoxChange(e)}
               />
             </Form.Group>
@@ -165,7 +176,6 @@ const EditMaket = ({ token, maketImages, categories }) => {
             <Form.Control
               size='sm'
               type='text'
-              placeholder='Введите наименование макета'
               name='name'
               value={maketData.name}
               onChange={(e) => handleChange(e)}
@@ -177,7 +187,6 @@ const EditMaket = ({ token, maketImages, categories }) => {
             <Form.Control
               size='sm'
               type='text'
-              placeholder='Введите наименование макета на английском'
               name='name_en'
               value={maketData.name_en}
               onChange={(e) => handleChange(e)}
@@ -191,7 +200,6 @@ const EditMaket = ({ token, maketImages, categories }) => {
             <Form.Control
               size='sm'
               type='text'
-              placeholder='Введите краткое описание макета'
               name='shortdesc'
               value={maketData.shortdesc}
               onChange={(e) => handleChange(e)}
@@ -203,7 +211,6 @@ const EditMaket = ({ token, maketImages, categories }) => {
             <Form.Control
               size='sm'
               type='text'
-              placeholder='Введите краткое описание макета на английском'
               name='shortdesc_en'
               value={maketData.shortdesc_en}
               onChange={(e) => handleChange(e)}
@@ -218,7 +225,6 @@ const EditMaket = ({ token, maketImages, categories }) => {
               as='textarea'
               size='sm'
               type='text'
-              placeholder='Введите описание макета'
               name='description'
               value={maketData.description}
               onChange={(e) => handleChange(e)}
@@ -231,7 +237,6 @@ const EditMaket = ({ token, maketImages, categories }) => {
               as='textarea'
               size='sm'
               type='text'
-              placeholder='Введите описание макета на английском'
               name='description_en'
               value={maketData.description_en}
               onChange={(e) => handleChange(e)}
@@ -246,10 +251,9 @@ const EditMaket = ({ token, maketImages, categories }) => {
               as='textarea'
               size='sm'
               type='text'
-              placeholder='Введите ключевые слова, через запятую'
               name='keywords'
               value={maketData.keywords}
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => keywordsChange(e)}
               required
             />
           </Col>
@@ -259,10 +263,9 @@ const EditMaket = ({ token, maketImages, categories }) => {
               as='textarea'
               size='sm'
               type='text'
-              placeholder='Введите ключевые слова, через запятую, на английском'
               name='keywords_en'
               value={maketData.keywords_en}
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => keywordsChange(e)}
               required
             />
           </Col>
@@ -273,7 +276,6 @@ const EditMaket = ({ token, maketImages, categories }) => {
             <Form.Control
               size='sm'
               type='text'
-              placeholder='Введите срок производства макета'
               name='prodtime'
               value={maketData.prodtime}
               onChange={(e) => handleChange(e)}
@@ -287,11 +289,21 @@ const EditMaket = ({ token, maketImages, categories }) => {
               name='category'
               onChange={(e) => handleChange(e)}
             >
-              {categories.map(({ name, _id }) => (
-                <option key={_id} value={_id}>
-                  {name}
-                </option>
-              ))}
+              <option value={maketData.category}>
+                {
+                  categories.filter(
+                    (category) =>
+                      maketData.category === category._id && category.name
+                  )[0].name
+                }
+              </option>
+              {categories
+                .filter((category) => maketData.category !== category._id)
+                .map(({ name, _id }) => (
+                  <option key={_id} value={_id}>
+                    {name}
+                  </option>
+                ))}
             </Form.Control>
           </Col>
         </Row>
@@ -310,19 +322,21 @@ const EditMaket = ({ token, maketImages, categories }) => {
               name='image'
               onChange={(e) => imageSelected(e)}
             >
-              <option>Выбери изображение...</option>
-              {maketImages.map((img) => (
-                <option key={img} value={img}>
-                  {img}
-                </option>
-              ))}
+              <option value={images[0]}>{images[0]}</option>
+              {maketImages
+                .filter((img) => images[0] !== `/images/makets/${img}`)
+                .map((img) => (
+                  <option key={img} value={`/images/makets/${img}`}>
+                    {`/images/makets/${img}`}
+                  </option>
+                ))}
             </Form.Control>
           </Col>
           <Col md={5} className='d-flex justify-content-md-center'>
             <div>
               <Button size='lg' className='mt-3' type='submit'>
                 <FaRegSave className='me-2' />
-                Создать
+                Изменить
               </Button>
               <Link href='/admin/makets'>
                 <Button
@@ -350,11 +364,13 @@ export const getServerSideProps = async (ctx) => {
   const categories = await axios.get(
     `${API_URL}categories?sort=order&select=id, name`
   )
+  const maket = await axios.get(`${API_URL}makets/${ctx.query.id}`)
   return {
     props: {
       token: res.token,
       maketImages: filenames,
       categories: categories.data.data,
+      maket: maket.data.data,
     },
   }
 }

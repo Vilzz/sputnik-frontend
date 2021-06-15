@@ -10,7 +10,7 @@ const MaketsList = ({ makets, token }) => {
   return (
     <>
       {makets.map((maket) => (
-        <Row className='mb-4'>
+        <Row className='mb-4' key={maket._id}>
           <Col md={4}>
             {maket.images.length > 0 ? (
               <Image src={maket.images[0]} width={220} height={330} />
@@ -53,7 +53,11 @@ const MaketsList = ({ makets, token }) => {
                 Масштабы:
                 {maket.scales.length > 0 &&
                   maket.scales.map((scale) => (
-                    <Badge variant='info' className='bg-success mx-1'>
+                    <Badge
+                      variant='info'
+                      className='bg-success mx-1'
+                      key={scale}
+                    >
                       {scale}
                     </Badge>
                   ))}

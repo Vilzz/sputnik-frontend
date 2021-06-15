@@ -54,6 +54,9 @@ const CreateMaket = ({ token, maketImages, categories }) => {
     }
   }
   const handleChange = (e) => {
+    if (e.target.name === 'keywords' || e.target.names === 'keywords_en') {
+      setMaketData({ ...maketData, [e.target.name]: e.target.value.split(',') })
+    }
     setMaketData({ ...maketData, [e.target.name]: e.target.value })
   }
 
