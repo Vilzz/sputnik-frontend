@@ -3,7 +3,9 @@ import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { GoGear, GoTrashcan } from 'react-icons/go'
+import { GoPlus, GoGear, GoTrashcan } from 'react-icons/go'
+import { RiPriceTag2Line } from 'react-icons/ri'
+import { TiArrowBackOutline } from 'react-icons/ti'
 import { API_URL } from '@/config/index'
 import AdminRoutesProtection from '@/components/AdminRoutesProtection'
 import Layout from '@/components/Layout'
@@ -15,7 +17,7 @@ import { parseCookies } from '@/helpers/index'
 const Prices = ({ maket, token }) => {
   const router = useRouter()
   const formatDate = (date) => {
-    return format(new Date(date), 'dd-MM-yyyy')
+    return format(new Date(date), 'dd MMMM yyyy k:mm:ss', { locale: ru })
   }
   const deletePrice = async (e) => {
     let id
@@ -33,7 +35,7 @@ const Prices = ({ maket, token }) => {
         }
         await axios.delete(`${API_URL}prices/${id}`, config)
         toast.success('Цена удалена успешно')
-        setTimeout(() => router.push(`/admin/makets`), 1000)
+        router.push(`/admin/makets/${maket._id}/prices`)
       } catch (error) {
         toast.error(
           `Ошибка: ${error.response.status} ${error.response.data.error})`
@@ -47,10 +49,11 @@ const Prices = ({ maket, token }) => {
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
           <h2 className='text-primary mb-2 ms-2'>
+            <RiPriceTag2Line />
             Цены на макет <span className='fw-bold'>{maket.name}</span>
           </h2>
           {maket.prices.length > 0 ? (
-            <Table striped bordered hover className='table-primary'>
+            <Table striped bordered hover className='table-gray'>
               <thead>
                 <tr className='table-dark'>
                   <th>Масштаб</th>
@@ -80,7 +83,7 @@ const Prices = ({ maket, token }) => {
                       {formatDate(price.createdAt)}
                     </td>
                     <td className='d-flex justify-content-evenly'>
-                      <Link href={`/admin/makets/${maket._id}/editprice`}>
+                      <Link href={`/admin/makets/${maket._id}/${price._id}`}>
                         <a className='btn btn-xs btn-primary me-1'>
                           <GoGear />
                         </a>
@@ -109,10 +112,15 @@ const Prices = ({ maket, token }) => {
           md={{ span: 4, offset: 4 }}
         >
           <Link href={`/admin/makets/${maket._id}/addprice`}>
-            <a className='btn btn-primary'>Добавить цену</a>
+            <a className='btn btn-primary'>
+              <GoPlus className='me-2' />
+              Добавить цену
+            </a>
           </Link>
           <Link href={'/admin/makets'}>
-            <a className='btn btn-secondary'>Вернуться к списку</a>
+            <a className='btn btn-secondary'>
+              <TiArrowBackOutline className='me-2' />К списку
+            </a>
           </Link>
         </Col>
       </Row>

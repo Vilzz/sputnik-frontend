@@ -78,27 +78,31 @@ const MaketsList = ({ makets, token }) => {
               Ключевые слова на англ.
               <span>{maket.keywords_en.join(',')}</span>
             </div>
-            <Row className='d-flex justify-content-evenly'>
-              <Col md={6}>
+            <Row>
+              <Col md={8} className='d-flex justify-content-start'>
                 Масштабы:
-                {maket.scales.length > 0 &&
-                  maket.scales.map((scale) => (
-                    <Badge
-                      variant='info'
-                      className='bg-success mx-1'
-                      key={scale}
-                    >
-                      {scale}
-                    </Badge>
-                  ))}
+                <div className='ms-3'>
+                  {maket.scales.length > 0 &&
+                    maket.scales.map((scale) => (
+                      <Badge
+                        variant='info'
+                        className='bg-success me-1'
+                        key={scale}
+                      >
+                        {scale}
+                      </Badge>
+                    ))}
+                </div>
               </Col>
-              <Col md={6} className='px-5 pt-2 pt-md-0'>
+              <Col md={4} className='d-flex justify-content-start pt-2 pt-md-0'>
                 Опубликовано:
-                {maket.published ? (
-                  <Badge className='bg-success'>ДА</Badge>
-                ) : (
-                  <Badge className='bg-danger'>НЕТ</Badge>
-                )}
+                <div className='ms-3'>
+                  {maket.published ? (
+                    <Badge className='bg-success'>ДА</Badge>
+                  ) : (
+                    <Badge className='bg-danger'>НЕТ</Badge>
+                  )}
+                </div>
               </Col>
             </Row>
             <hr />

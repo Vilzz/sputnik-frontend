@@ -72,7 +72,7 @@ const Maket = ({ maket }) => {
           </div>
           <div className='prices mt-3'>
             {maket.prices.length > 0 && (
-              <Table striped bordered hover className='table-primary'>
+              <Table striped bordered hover className='table-gray'>
                 <thead>
                   <tr className='table-dark'>
                     <th>#</th>

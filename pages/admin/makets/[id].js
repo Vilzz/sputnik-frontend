@@ -6,7 +6,8 @@ import fs from 'fs'
 import axios from 'axios'
 import Layout from '@/components/Layout'
 import AdminRoutesProtection from '@/components/AdminRoutesProtection'
-import { FaPlus, FaImage, FaRegSave, FaList } from 'react-icons/fa'
+import { FaPlus, FaImage, FaRegSave } from 'react-icons/fa'
+import { TiArrowBackOutline } from 'react-icons/ti'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { parseCookies } from '@/helpers/index'
@@ -345,7 +346,7 @@ const EditMaket = ({ token, maketImages, categories, maket }) => {
                   className='mt-3 ms-3'
                   type='button'
                 >
-                  <FaList className='me-2' />К списку
+                  <TiArrowBackOutline className='me-2' />К макетам
                 </Button>
               </Link>
             </div>

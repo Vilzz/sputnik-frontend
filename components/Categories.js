@@ -40,7 +40,7 @@ const Categories = ({ categories, token }) => {
         bordered
         responsive
         size='sm'
-        className='table-primary  table align-middle'
+        className='table-gray table align-middle'
       >
         <thead>
           <tr className='table-dark'>
@@ -74,18 +74,20 @@ const Categories = ({ categories, token }) => {
                 <td>{category.order}</td>
                 <td>{category.showinmenu ? 'Да' : 'Нет'}</td>
                 <td>
-                  <Link href={`/admin/category/${category._id}`}>
-                    <a className='btn btn-xs btn-primary me-1'>
-                      <GoGear />
-                    </a>
-                  </Link>
-                  <button
-                    className='btn btn-xs btn-danger'
-                    data={category._id}
-                    onClick={(e) => deleteCategory(e)}
-                  >
-                    <GoTrashcan data={category._id} />
-                  </button>
+                  <div className='d-flex'>
+                    <Link href={`/admin/category/${category._id}`}>
+                      <a className='btn btn-xs btn-primary me-1'>
+                        <GoGear />
+                      </a>
+                    </Link>
+                    <button
+                      className='btn btn-xs btn-danger'
+                      data={category._id}
+                      onClick={(e) => deleteCategory(e)}
+                    >
+                      <GoTrashcan data={category._id} />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

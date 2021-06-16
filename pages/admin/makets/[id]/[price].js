@@ -3,26 +3,31 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import Link from 'next/link'
 import Layout from '@/components/Layout'
+import { GoGear } from 'react-icons/go'
+import { FaRegSave } from 'react-icons/fa'
+import { TiArrowBackOutline } from 'react-icons/ti'
+import { Row, Col, Form, Button } from 'react-bootstrap'
 import AdminRoutesProtection from '@/components/AdminRoutesProtection'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { API_URL } from '@/config/index'
 import { parseCookies } from '@/helpers/index'
-import { Form, Row, Col, Button } from 'react-bootstrap'
-import { FaPlusSquare } from 'react-icons/fa'
+import { API_URL } from '@/config/index'
 
-const Addprice = ({ token, maketId }) => {
+const Editprice = ({ token, maketId, price }) => {
   const router = useRouter()
-  const [scale, setScale] = useState('')
-  const [price, setPrice] = useState({
+  const [scale, setScale] = useState(price.scale)
+  const [priceData, setPriceData] = useState({
     rub: {
-      price: '',
+      currency: price.price.rub.currency,
+      price: price.price.rub.price,
+      symb: price.price.rub.symb,
     },
     usd: {
-      price: '',
+      currency: price.price.usd.currency,
+      price: price.price.usd.price,
+      symb: price.price.usd.symb,
     },
   })
-
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -31,12 +36,12 @@ const Addprice = ({ token, maketId }) => {
           Authorization: `Bearer ${token}`,
         },
       }
-      const res = await axios.post(
-        `${API_URL}prices`,
-        { scale, price: { ...price }, maket: maketId },
+      const res = await axios.put(
+        `${API_URL}prices/${price._id}`,
+        { scale, price: { ...priceData }, maket: maketId },
         config
       )
-      toast.success('Цена добавлена успешно')
+      toast.success('Цена изменена успешно')
       setTimeout(() => router.push(`/admin/makets/${maketId}/prices`), 1000)
     } catch (error) {
       toast.error(
@@ -44,16 +49,16 @@ const Addprice = ({ token, maketId }) => {
       )
     }
   }
-
   return (
     <Layout>
       <ToastContainer />
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
           <h2 className='text-primary'>
-            <FaPlusSquare className='me-2' />
-            Добавить цену для макета
+            <GoGear className='me-2' />
+            Изменить цену макета
           </h2>
+          <hr />
           <Form onSubmit={(e) => handleSubmit(e)}>
             <Form.Group>
               <Form.Label>
@@ -62,7 +67,6 @@ const Addprice = ({ token, maketId }) => {
               <Form.Control
                 size='sm'
                 type='text'
-                placeholder='Введи наименование масштаба'
                 value={scale}
                 required
                 onChange={(e) => setScale(e.target.value)}
@@ -73,11 +77,13 @@ const Addprice = ({ token, maketId }) => {
               <Form.Control
                 size='sm'
                 type='text'
-                placeholder='Введи цену масштаба в рублях'
-                value={price.rub.price}
+                value={priceData.rub.price}
                 required
                 onChange={(e) =>
-                  setPrice({ ...price, rub: { price: e.target.value } })
+                  setPriceData({
+                    ...priceData,
+                    rub: { ...priceData.rub, price: e.target.value },
+                  })
                 }
               />
             </Form.Group>
@@ -86,20 +92,26 @@ const Addprice = ({ token, maketId }) => {
               <Form.Control
                 size='sm'
                 type='text'
-                placeholder='Введи цену масштаба в долларах сша'
-                value={price.usd.price}
+                value={priceData.usd.price}
                 required
                 onChange={(e) =>
-                  setPrice({ ...price, usd: { price: e.target.value } })
+                  setPriceData({
+                    ...priceData,
+                    usd: { ...priceData.usd, price: e.target.value },
+                  })
                 }
               />
             </Form.Group>
             <div className='d-flex justify-content-center mt-3'>
-              <Button type='submit' className='me-3'>
-                Создать
+              <Button type='submit' className='me-2'>
+                <FaRegSave className='me-3' />
+                Сохранить
               </Button>
               <Link href={`/admin/makets/${maketId}/prices`}>
-                <a className='btn btn-secondary'>Вернуться к ценам</a>
+                <a className='btn btn-secondary'>
+                  <TiArrowBackOutline className='me-2' />
+                  Вернуться к ценам
+                </a>
               </Link>
             </div>
           </Form>
@@ -109,15 +121,17 @@ const Addprice = ({ token, maketId }) => {
   )
 }
 
-export default AdminRoutesProtection(Addprice)
+export default AdminRoutesProtection(Editprice)
 
 export const getServerSideProps = async (ctx) => {
-  const maketId = ctx.query.id
+  const { id: maketId, price: priceId } = ctx.query
   const res = parseCookies(ctx.req)
+  const price = await axios.get(`${API_URL}prices/${priceId}`)
   return {
     props: {
       token: res.token,
       maketId,
+      price: price.data.data,
     },
   }
 }
