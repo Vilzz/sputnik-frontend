@@ -13,16 +13,16 @@ const Header = () => {
     return (
       <>
         <li className='nav-item'>
-          <Link href='/about'>
+          <Link href='/'>
             <a className='nav-link'>
-              {locale === 'ru-RU' ? 'О нас' : 'About us'}
+              {locale === 'ru-RU' ? 'Каталог' : 'Catalog'}
             </a>
           </Link>
         </li>
         <li className='nav-item'>
-          <Link href='/catalog'>
+          <Link href='/about'>
             <a className='nav-link'>
-              {locale === 'ru-RU' ? 'Каталог' : 'Catalog'}
+              {locale === 'ru-RU' ? 'О нас' : 'About us'}
             </a>
           </Link>
         </li>

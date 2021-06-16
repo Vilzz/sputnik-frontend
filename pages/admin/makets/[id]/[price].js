@@ -103,12 +103,12 @@ const Editprice = ({ token, maketId, price }) => {
               />
             </Form.Group>
             <div className='d-flex justify-content-center mt-3'>
-              <Button type='submit' className='me-2'>
+              <Button type='submit' className='me-2 fw-bold'>
                 <FaRegSave className='me-3' />
                 Сохранить
               </Button>
               <Link href={`/admin/makets/${maketId}/prices`}>
-                <a className='btn btn-secondary'>
+                <a className='btn btn-secondary fw-bold'>
                   <TiArrowBackOutline className='me-2' />
                   Вернуться к ценам
                 </a>

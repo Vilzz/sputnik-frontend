@@ -335,7 +335,7 @@ const EditMaket = ({ token, maketImages, categories, maket }) => {
           </Col>
           <Col md={5} className='d-flex justify-content-md-center'>
             <div>
-              <Button size='lg' className='mt-3' type='submit'>
+              <Button size='lg' className='mt-3 fw-bold' type='submit'>
                 <FaRegSave className='me-2' />
                 Изменить
               </Button>
@@ -343,7 +343,7 @@ const EditMaket = ({ token, maketImages, categories, maket }) => {
                 <Button
                   size='lg'
                   variant='secondary'
-                  className='mt-3 ms-3'
+                  className='mt-3 ms-3 fw-bold'
                   type='button'
                 >
                   <TiArrowBackOutline className='me-2' />К макетам

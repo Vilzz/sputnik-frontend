@@ -95,7 +95,7 @@ const CreateCategory = ({ token, filenames }) => {
         <Button
           type='button'
           onClick={() => setShowModal(true)}
-          className='btn-primary btn-icon my-4'
+          className='btn-primary btn-icon my-4 fw-bold'
         >
           <FaImage className='me-1' /> Загрузить
         </Button>
@@ -181,7 +181,7 @@ const CreateCategory = ({ token, filenames }) => {
               })
             }
           />
-          <Button size='lg' className='mt-3' type='submit'>
+          <Button size='lg' className='mt-3 fw-bold' type='submit'>
             <FaRegSave className='me-2' />
             Сохранить
           </Button>
@@ -189,7 +189,7 @@ const CreateCategory = ({ token, filenames }) => {
             <Button
               size='lg'
               variant='secondary'
-              className='mt-3 ms-3'
+              className='mt-3 ms-3 fw-bold'
               type='button'
             >
               <FaList className='me-2' />К списку

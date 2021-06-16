@@ -112,13 +112,13 @@ const Prices = ({ maket, token }) => {
           md={{ span: 4, offset: 4 }}
         >
           <Link href={`/admin/makets/${maket._id}/addprice`}>
-            <a className='btn btn-primary'>
+            <a className='btn btn-primary fw-bold'>
               <GoPlus className='me-2' />
               Добавить цену
             </a>
           </Link>
           <Link href={'/admin/makets'}>
-            <a className='btn btn-secondary'>
+            <a className='btn btn-secondary fw-bold'>
               <TiArrowBackOutline className='me-2' />К списку
             </a>
           </Link>

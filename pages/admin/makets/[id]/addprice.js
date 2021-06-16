@@ -9,7 +9,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import { API_URL } from '@/config/index'
 import { parseCookies } from '@/helpers/index'
 import { Form, Row, Col, Button } from 'react-bootstrap'
-import { FaPlusSquare } from 'react-icons/fa'
+import { FaPlusSquare, FaPlus } from 'react-icons/fa'
+import { TiArrowBackOutline } from 'react-icons/ti'
 
 const Addprice = ({ token, maketId }) => {
   const router = useRouter()
@@ -95,11 +96,14 @@ const Addprice = ({ token, maketId }) => {
               />
             </Form.Group>
             <div className='d-flex justify-content-center mt-3'>
-              <Button type='submit' className='me-3'>
-                Создать
+              <Button type='submit' className='me-3 fw-bold'>
+                <FaPlus className='me-2' /> Создать
               </Button>
               <Link href={`/admin/makets/${maketId}/prices`}>
-                <a className='btn btn-secondary'>Вернуться к ценам</a>
+                <a className='btn btn-secondary fw-bold'>
+                  <TiArrowBackOutline className='me-2' />
+                  Вернуться к ценам
+                </a>
               </Link>
             </div>
           </Form>

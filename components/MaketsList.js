@@ -108,18 +108,19 @@ const MaketsList = ({ makets, token }) => {
             <hr />
             <div className='d-flex justify-content-center mt-3'>
               <Link href={`/admin/makets/${maket._id}/prices`}>
-                <a className='btn btn-warning me-2'>
+                <a className='btn btn-warning text-white fw-bold me-2'>
                   <RiPriceTag2Line /> Цены
                 </a>
               </Link>
               <Link href={`/admin/makets/${maket._id}`}>
-                <a className='btn btn-primary me-2'>
+                <a className='btn btn-primary fw-bold me-2'>
                   <GoGear /> Изменить
                 </a>
               </Link>
               <Button
                 variant='danger'
                 data={maket._id}
+                className='fw-bold'
                 onClick={(e) => deleteMaket(e)}
               >
                 <GoTrashcan /> Удалить
