@@ -1,14 +1,16 @@
 import nextConnect from 'next-connect'
 import cookie from 'cookie'
 import multer from 'multer'
+import axios from 'axios'
+import { API_URL } from '@/config/index'
 
 const imageRoute = nextConnect({
   onError(error, req, res) {
     res.status(501).json({ error: `Что-то пошло не так ${error.message}` })
   },
-  onNoMatch(req, res) {
-    res.status(405).json({ error: `Метод ${req.method} запрещен` })
-  },
+  // onNoMatch(req, res) {
+  //   res.status(405).json({ error: `Метод ${req.method} запрещен` })
+  // },
   //attachParams: true,
 })
 
@@ -27,19 +29,29 @@ const upload = multer({
     cb(null, acceptFile)
   },
 })
-// @TODO Доделать проверку на разрешение добавлять фото
-imageRoute.use((req, res, next) => {
+
+imageRoute.use(async (req, res, next) => {
+  if (req.method !== 'POST') {
+    res.status(405).json({ error: `Метод ${req.method} запрещен` })
+  }
   if (!req.headers.cookie) {
     res.status(403).json({ message: 'Требуется авторизация' })
-    return
   }
   const { token } = cookie.parse(req.headers.cookie)
-  // @TODO Вытащить пользователя и проверить его роль
-  console.log(token)
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  const apiRes = await axios.get(`${API_URL}auth/me`, config)
+  if (!apiRes || apiRes.data.data.role !== 'Admin') {
+    res.status(403).json({ message: 'Доступ запрещен' })
+  }
   next()
 })
 imageRoute.use(upload.single('file'))
-imageRoute.post((req, res) => {
+imageRoute.post('/api/image', (req, res) => {
   res.status(200).json({ data: 'Success', file: req.file.path })
 })
 
