@@ -347,7 +347,7 @@ const EditMaket = ({ token, maketImages, categories, maket }) => {
             <Button
               type='button'
               onClick={() => setShowModal(true)}
-              className='btn-primary btn-icon my-4'
+              className='btn-primary btn-icon my-4 fw-bold'
             >
               <FaImage className='me-1' /> Загрузить
             </Button>

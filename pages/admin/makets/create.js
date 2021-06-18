@@ -12,6 +12,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import { parseCookies } from '@/helpers/index'
 import { API_URL } from '@/config/index'
 import { Form, Col, Row, Button } from 'react-bootstrap'
+import Modal from '@/components/Modal'
+import ImageUpload from '@/components/ImageUpload'
 
 const CreateMaket = ({ token, maketImages, categories }) => {
   const router = useRouter()
@@ -28,8 +30,12 @@ const CreateMaket = ({ token, maketImages, categories }) => {
     category: '60c594a53347701fc71ccf5f',
     published: false,
   })
-  const [images, setImages] = useState([])
+  const [images, setImages] = useState(['Выбери изображение...'])
   const [scales, setScales] = useState([])
+  const [imagesList, setImagesList] = useState([
+    ...maketImages.map((im) => `/images/makets/${im}`),
+  ])
+  const [showModal, setShowModal] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -61,7 +67,7 @@ const CreateMaket = ({ token, maketImages, categories }) => {
   }
 
   const imageSelected = (e) => {
-    setImages([`/images/makets/${e.target.value}`])
+    setImages([e.target.value])
   }
 
   const checkBoxChange = (e) => {
@@ -84,6 +90,15 @@ const CreateMaket = ({ token, maketImages, categories }) => {
           .filter((scale) => scale !== e.target.name)
           .sort(sortScales),
       ])
+    }
+  }
+  const imageUploaded = (text) => {
+    if (text.data === 'Success') {
+      toast.success(`Изображение добавлено ${text.file}`)
+      setImages([text.file])
+      setImagesList([text.file, ...imagesList])
+    } else {
+      toast.error(`Ошибка: ${text.error}`)
     }
   }
   return (
@@ -288,6 +303,7 @@ const CreateMaket = ({ token, maketImages, categories }) => {
             <Form.Control
               as='select'
               name='category'
+              size='sm'
               onChange={(e) => handleChange(e)}
             >
               {categories.map(({ name, _id }) => (
@@ -300,7 +316,7 @@ const CreateMaket = ({ token, maketImages, categories }) => {
         </Row>
         <Row className='justify-content-md-center'>
           <Col md={{ span: 2, offset: 1 }}>
-            {images.length > 0 ? (
+            {images[0] !== 'Выбери изображение...' ? (
               <Image src={images[0]} width={70} height={105} />
             ) : (
               <h5 className='mt-4'>Не выбрано</h5>
@@ -313,13 +329,22 @@ const CreateMaket = ({ token, maketImages, categories }) => {
               name='image'
               onChange={(e) => imageSelected(e)}
             >
-              <option>Выбери изображение...</option>
-              {maketImages.map((img) => (
-                <option key={img} value={img}>
-                  {img}
-                </option>
-              ))}
+              <option>{images[0]}</option>
+              {imagesList
+                .filter((img) => img !== images[0])
+                .map((img) => (
+                  <option key={img} value={img}>
+                    {img}
+                  </option>
+                ))}
             </Form.Control>
+            <Button
+              type='button'
+              onClick={() => setShowModal(true)}
+              className='btn-primary btn-icon my-4 fw-bold'
+            >
+              <FaImage className='me-1' /> Загрузить
+            </Button>
           </Col>
           <Col md={5} className='d-flex justify-content-md-center'>
             <div>
@@ -341,6 +366,18 @@ const CreateMaket = ({ token, maketImages, categories }) => {
           </Col>
         </Row>
       </Form>
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        title={'Загрузить изображение'}
+      >
+        <ImageUpload
+          imageUploaded={imageUploaded}
+          onClose={() => setShowModal(false)}
+          token={token}
+          folder='makets'
+        />
+      </Modal>
     </Layout>
   )
 }
