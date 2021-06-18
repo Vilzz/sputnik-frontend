@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import axios from 'axios'
-import { API_URL } from '@/config/index'
+import { NEXT_URL } from '@/config/index'
 import styles from '@/styles/Form.module.css'
 import { Form, Button } from 'react-bootstrap'
 
-const ImageUpload = ({ imageUploaded, token, onClose }) => {
+const ImageUpload = ({ imageUploaded, token, onClose, folder }) => {
   const [image, setImage] = useState(null)
 
   const handleSubmit = async (e) => {
@@ -15,16 +15,24 @@ const ImageUpload = ({ imageUploaded, token, onClose }) => {
       },
     }
     const formData = new FormData()
-    formData.append('file', image)
-    formData.append('folder', 'categories')
-    try {
-      const res = await axios.post(`${API_URL}images`, formData, config)
-      imageUploaded(res.data)
-    } catch (error) {
-      imageUploaded(error.response.data)
+    if (image !== null) {
+      formData.append('file', image)
+      try {
+        const res = await axios.post(
+          `${NEXT_URL}api/image?folder=${folder}`,
+          formData,
+          config
+        )
+        imageUploaded(res.data)
+      } catch (error) {
+        imageUploaded(error.response.data)
+      }
+    } else {
+      imageUploaded({ error: 'Вы забыли добавить файл' })
     }
     onClose()
   }
+
   const handleFileChange = (e) => {
     setImage(e.target.files[0])
   }

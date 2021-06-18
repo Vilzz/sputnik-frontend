@@ -11,21 +11,24 @@ const imageRoute = nextConnect({
   // onNoMatch(req, res) {
   //   res.status(405).json({ error: `Метод ${req.method} запрещен` })
   // },
-  //attachParams: true,
+  attachParams: true,
 })
 
 const upload = multer({
-  limits: { fileSize: 1000000 },
+  limits: { fileSize: 2000000 },
   storage: multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './public/images/img/')
+      const folder = req.query.folder || 'img'
+      cb(null, `./public/images/${folder}/`)
     },
     filename: function (req, file, cb) {
       cb(null, file.originalname)
     },
   }),
   fileFilter: function (req, file, cb) {
-    const acceptFile = ['image/jpeg', 'image/png'].includes(file.mimetype)
+    const acceptFile = ['image/jpeg', 'image/png', 'image/svg+xml'].includes(
+      file.mimetype
+    )
     cb(null, acceptFile)
   },
 })
@@ -52,7 +55,7 @@ imageRoute.use(async (req, res, next) => {
 })
 imageRoute.use(upload.single('file'))
 imageRoute.post('/api/image', (req, res) => {
-  res.status(200).json({ data: 'Success', file: req.file.path })
+  res.status(200).json({ data: 'Success', file: req.file.path.slice(6) })
 })
 
 export const config = {

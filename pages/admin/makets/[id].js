@@ -13,7 +13,9 @@ import 'react-toastify/dist/ReactToastify.css'
 import { parseCookies } from '@/helpers/index'
 import { API_URL } from '@/config/index'
 import { Form, Col, Row, Button } from 'react-bootstrap'
-//@TODO Изменить компонент для редактирования макета
+import Modal from '@/components/Modal'
+import ImageUpload from '@/components/ImageUpload'
+
 const EditMaket = ({ token, maketImages, categories, maket }) => {
   const router = useRouter()
   const [maketData, setMaketData] = useState({
@@ -31,6 +33,7 @@ const EditMaket = ({ token, maketImages, categories, maket }) => {
   })
   const [images, setImages] = useState([...maket.images])
   const [scales, setScales] = useState([...maket.scales])
+  const [showModal, setShowModal] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -65,6 +68,15 @@ const EditMaket = ({ token, maketImages, categories, maket }) => {
 
   const imageSelected = (e) => {
     setImages([e.target.value])
+  }
+  const imageUploaded = (text) => {
+    if (text.data === 'Success') {
+      toast.success(`Изображение добавлено ${text.file}`)
+      setImages([text.file])
+      router.push(`/admin/makets/${router.query.id}`)
+    } else {
+      toast.error(`Ошибка: ${text.error}`)
+    }
   }
 
   const checkBoxChange = (e) => {
@@ -332,6 +344,13 @@ const EditMaket = ({ token, maketImages, categories, maket }) => {
                   </option>
                 ))}
             </Form.Control>
+            <Button
+              type='button'
+              onClick={() => setShowModal(true)}
+              className='btn-primary btn-icon my-4'
+            >
+              <FaImage className='me-1' /> Загрузить
+            </Button>
           </Col>
           <Col md={5} className='d-flex justify-content-md-center'>
             <div>
@@ -353,6 +372,18 @@ const EditMaket = ({ token, maketImages, categories, maket }) => {
           </Col>
         </Row>
       </Form>
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        title={'Загрузить изображение'}
+      >
+        <ImageUpload
+          imageUploaded={imageUploaded}
+          onClose={() => setShowModal(false)}
+          token={token}
+          folder='makets'
+        />
+      </Modal>
     </Layout>
   )
 }

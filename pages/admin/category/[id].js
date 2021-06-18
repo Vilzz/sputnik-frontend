@@ -57,8 +57,9 @@ const CategoryEdit = ({ token, category, filenames }) => {
     }
   }
   const imageUploaded = (text) => {
-    if (text.success) {
-      toast.success(`Изображение добавлено ${text.data}`)
+    if (text.data === 'Success') {
+      toast.success(`Изображение добавлено ${text.file}`)
+      router.push(`/admin/category/${router.query.id}`)
     } else {
       toast.error(`Ошибка: ${text.error}`)
     }
@@ -208,6 +209,7 @@ const CategoryEdit = ({ token, category, filenames }) => {
           imageUploaded={imageUploaded}
           onClose={() => setShowModal(false)}
           token={token}
+          folder='icons'
         />
       </Modal>
     </Layout>
