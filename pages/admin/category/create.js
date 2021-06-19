@@ -57,8 +57,9 @@ const CreateCategory = ({ token, filenames }) => {
     }
   }
   const imageUploaded = (text) => {
-    if (text.success) {
-      toast.success(`Изображение добавлено ${text.data}`)
+    if (text.data === 'Success') {
+      toast.success(`Изображение добавлено ${text.file}`)
+      setImage(text.file)
     } else {
       toast.error(`Ошибка: ${text.error}`)
     }
@@ -78,7 +79,7 @@ const CreateCategory = ({ token, filenames }) => {
             <p>Изображение не выбрано</p>
           </div>
         )}
-        <div className='d-flex justify-content-evenly flex-wrap'>
+        <div className='mt-3 d-flex justify-content-evenly flex-wrap'>
           {filenames.map((file) => (
             <Button
               size='sm'
@@ -206,6 +207,7 @@ const CreateCategory = ({ token, filenames }) => {
           imageUploaded={imageUploaded}
           onClose={() => setShowModal(false)}
           token={token}
+          folder='icons'
         />
       </Modal>
     </Layout>
