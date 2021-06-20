@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 import Vacancies from '@/components/Vacancies'
 import Layout from '@/components/Layout'
-import { Col } from 'react-bootstrap'
 import axios from 'axios'
 import { API_URL } from '../config'
 
