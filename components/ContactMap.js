@@ -39,60 +39,42 @@ const ContactMap = ({
       </h1>
       <hr />
       <ListGroup className='mb-3'>
-        <ListGroup.Item
-          variant='secondary'
-          className='d-flex justify-content-between'
-        >
+        <ListGroup.Item className='d-flex justify-content-between'>
           <strong>
             <GoGlobe className='me-2' />
             Адрес:
           </strong>
           <span>{address}</span>
         </ListGroup.Item>
-        <ListGroup.Item
-          variant='secondary'
-          className='d-flex justify-content-between'
-        >
+        <ListGroup.Item className='d-flex justify-content-between'>
           <strong>
             <FaPhoneAlt className='me-2' />
             Телефон:
           </strong>
           <span>{phone}</span>
         </ListGroup.Item>
-        <ListGroup.Item
-          variant='secondary'
-          className='d-flex justify-content-between'
-        >
+        <ListGroup.Item className='d-flex justify-content-between'>
           <strong>
             <HiOutlineMail className='me-2' />
             Электронная почта:
           </strong>
           <span>{email}</span>
         </ListGroup.Item>
-        <ListGroup.Item
-          variant='secondary'
-          className='d-flex justify-content-between'
-        >
+        <ListGroup.Item className='d-flex justify-content-between'>
           <strong>
             <FaGlobe className='me-2' />
             Сайт:
           </strong>
           <span>{site}</span>
         </ListGroup.Item>
-        <ListGroup.Item
-          variant='secondary'
-          className='d-flex justify-content-between'
-        >
+        <ListGroup.Item className='d-flex justify-content-between'>
           <strong>
             <FaInstagram className='me-2' />
             Instagram:
           </strong>{' '}
           <span>{instagram}</span>
         </ListGroup.Item>
-        <ListGroup.Item
-          variant='secondary'
-          className='d-flex justify-content-between'
-        >
+        <ListGroup.Item className='d-flex justify-content-between'>
           <strong>
             <FaVk className='me-2' />
             VK:

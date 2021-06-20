@@ -1,6 +1,7 @@
 import Layout from '@/components/Layout'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import { Col, Row } from 'react-bootstrap'
 
 const About = () => {
   const router = useRouter()
@@ -15,20 +16,24 @@ const About = () => {
       keywords='макеты,сувенирные макеты, макеты космических аппаратов, фабрика моделей'
     >
       {router.locale === 'ru-RU' ? (
-        <div className='row'>
+        <Col>
           <h1 className='my-3 ms-3 text-primary'>
             О макетной компании "Спутник"
           </h1>
           <hr />
-          <div className='row'>
-            <div className='col-12 col-md-4 py-2'>
+          <Row>
+            <Col
+              xs={{ offset: 1, span: 10 }}
+              md={{ offset: 1, span: 3 }}
+              className='py-2'
+            >
               <Image
                 src='/images/about_us_400x600.jpg'
-                width='400px'
-                height='600px'
+                width='300px'
+                height='450px'
               />
-            </div>
-            <div className='col-12 col-md-8 py-3 py-md-4 px-5'>
+            </Col>
+            <div className='col-12 col-md-7 py-3 py-md-4 px-5'>
               <p className='fs-6'>
                 <strong>Макетная мастерская «Спутник»</strong> - молодая
                 быстроразвивающаяся компания, объединившая под своим началом
@@ -59,8 +64,8 @@ const About = () => {
                 организациями, так и с частными заказчиками.
               </p>
             </div>
-          </div>
-        </div>
+          </Row>
+        </Col>
       ) : (
         // Todo: Добавить описание страници О нас на английском языке
         <h1>About Sputnik company</h1>
