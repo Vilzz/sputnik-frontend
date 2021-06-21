@@ -15,40 +15,38 @@ const Vacancies = ({ vacancies }) => {
     return format(new Date(date), 'dd MMMM yyyy', { locale: ru })
   }
   return isPublished !== null ? (
-    isPublished.map((vacancy) => (
-      <Col md={6} key={vacancy._id}>
-        <Card style={{ maxWidth: '540px' }}>
-          <Row className='g-0'>
-            <Col md={4}>
-              <Image
-                src='/images/assemble_400x600.jpg'
-                width={200}
-                height={300}
-              />
-            </Col>
-            <Col md={8}>
-              <Card.Body>
-                <Card.Title as='h5' className='fw-bold'>
-                  {vacancy.title}
-                </Card.Title>
-                <Card.Text className='lh-sm'>{vacancy.description}</Card.Text>
-                <Card.Text className='d-flex justify-content-between px-3'>
-                  Размещена: <strong>{formatDate(vacancy.updatedAt)}</strong>
-                </Card.Text>
-                <Card.Text className='d-flex justify-content-between px-3'>
-                  Зарплата от<strong> {vacancy.salary} руб</strong>
-                </Card.Text>
-              </Card.Body>
-            </Col>
+    <Col>
+      <Row className='g-4 justify-content-center'>
+        {isPublished.map((vacancy) => (
+          <Card style={{ width: '19rem' }} key={vacancy._id} className='me-4'>
+            <Card.Body style={{ minHeight: '200px' }}>
+              <Card.Title as='h5' className='fw-bold'>
+                {vacancy.title}
+              </Card.Title>
+              <Card.Text className='lh-sm' style={{ minHeight: '90px' }}>
+                {vacancy.description}
+              </Card.Text>
+              <Card.Text className='d-flex justify-content-between fs-6 lh-1'>
+                Дата:
+                <strong className='text-primary'>
+                  {formatDate(vacancy.updatedAt)}
+                </strong>
+              </Card.Text>
+              <Card.Text className='d-flex justify-content-between fs-6 lh-1'>
+                Зарплата от
+                <strong className='text-primary'> {vacancy.salary} руб</strong>
+              </Card.Text>
+            </Card.Body>
+
             <Card.Footer className='d-flex justify-content-center'>
               <Link href='/contacts'>
                 <Button as='a'>Откликнуться</Button>
               </Link>
             </Card.Footer>
-          </Row>
-        </Card>
-      </Col>
-    ))
+          </Card>
+        ))}
+      </Row>
+    </Col>
   ) : (
     <h3>Нет свободных вакансий на текущий момент</h3>
   )

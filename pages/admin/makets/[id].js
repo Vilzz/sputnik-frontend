@@ -112,7 +112,7 @@ const EditMaket = ({
       <ToastContainer />
       <Row>
         <Col md={{ span: 10, offset: 1 }}>
-          <h1 className='text-primary mb-3'>
+          <h1 className='text-primary mb-3 mt-4'>
             <FaPlus /> Редактировать макет
           </h1>
           <hr />

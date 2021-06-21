@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import { FaGlobe, FaPhoneAlt, FaInstagram, FaVk } from 'react-icons/fa'
 import { GoGlobe } from 'react-icons/go'
 import { HiOutlineMail } from 'react-icons/hi'
-import { ImAddressBook } from 'react-icons/im'
+
 import {
   COORDS,
   BASEMAP,
@@ -33,11 +33,6 @@ const ContactMap = ({
 }) => {
   return (
     <Col md={{ offset: 2, span: 8 }} className='mb-4'>
-      <h1 className='text-primary'>
-        <ImAddressBook className='me-2' />
-        Контактная информация
-      </h1>
-      <hr />
       <ListGroup className='mb-3'>
         <ListGroup.Item className='d-flex justify-content-between'>
           <strong>

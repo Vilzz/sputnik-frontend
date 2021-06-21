@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import Layout from '@/components/Layout'
+import { ImAddressBook } from 'react-icons/im'
 const ContactMap = dynamic(() => import('@/components/ContactMap'), {
   ssr: false,
 })
@@ -16,6 +17,11 @@ const Contacts = () => {
       }
       keywords='контакты, спутник макеты, макеты на заказ, model studio sputnik'
     >
+      <h1 className='text-primary my-3 ms-3'>
+        <ImAddressBook className='me-2' />
+        Контактная информация
+      </h1>
+      <hr />
       <ContactMap />
     </Layout>
   )

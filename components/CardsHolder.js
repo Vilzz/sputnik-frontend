@@ -11,7 +11,7 @@ const CardsHolder = ({ category }) => {
           height='70'
           alt={category.name1}
         />
-        <h1 className='ms-4 text-primary display-5'>{category.name}</h1>
+        <h1 className='ms-4 mt-2 text-primary display-5'>{category.name}</h1>
       </div>
       <hr />
       <div className='d-flex flex-wrap justify-content-evenly align-items-start'>

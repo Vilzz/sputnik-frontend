@@ -48,7 +48,7 @@ const Users = ({ token, users }) => {
           <AdminPanelMenu title={'Пользователи'} />
         </Col>
         <Col md={9}>
-          <h2 className='text-left text-primary'>Список пользователей</h2>
+          <h2 className='text-left text-primary mt-4'>Список пользователей</h2>
           <hr />
           <Table
             striped

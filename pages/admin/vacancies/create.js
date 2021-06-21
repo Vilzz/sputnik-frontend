@@ -51,9 +51,9 @@ const CreateVacancy = ({ token }) => {
         <ToastContainer />
         <Row>
           <Col sm={{ span: 12 }} md={{ span: 8, offset: 2 }}>
-            <h2 className='text-primary mb-3'>
+            <h1 className='text-primary mb-3 mt-4'>
               <FaPlus /> Создать вакансию
-            </h2>
+            </h1>
             <hr />
           </Col>
         </Row>

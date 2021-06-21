@@ -54,7 +54,7 @@ const Editprice = ({ token, maketId, price, defaultScales }) => {
       <ToastContainer />
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
-          <h2 className='text-primary'>
+          <h2 className='text-primary mt-4 mb-2'>
             <GoGear className='me-2' />
             Изменить цену макета
           </h2>

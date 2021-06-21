@@ -106,7 +106,7 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
       <ToastContainer />
       <Row>
         <Col md={{ span: 10, offset: 1 }}>
-          <h1 className='text-primary mb-3'>
+          <h1 className='text-primary mb-1 mt-4'>
             <FaPlus /> Создать макет
           </h1>
           <hr />

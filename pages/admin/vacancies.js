@@ -39,7 +39,7 @@ const Vacancies = ({ token, vacancies }) => {
             <AdminPanelMenu title='Вакансии' />
           </Col>
           <Col md={9}>
-            <h2 className='text-left text-primary'>Список вакансий</h2>
+            <h2 className='text-left text-primary mt-4'>Список вакансий</h2>
             <hr />
             {vacancies.length > 0 ? (
               <Table

@@ -35,6 +35,15 @@ a {
 .devbd{
   border: 1px solid #000;
 }
+
+  .layout-spacer{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 86vh;
+   
+  }
 .category_card{
   width: 16rem;
   margin-bottom: 30px;
@@ -87,7 +96,7 @@ a {
 }
 .maket-unit{
   padding:10px 0;
-  border: 1px solid lightslategrey;
+  border: 1px solid #bfbfbf;
   border-radius: 10px;
 }
 .maket-admin div{

@@ -14,9 +14,7 @@ import { API_URL } from '@/config/index'
 import AdminRoutesProtection from '@/components/AdminRoutesProtection'
 import { parseCookies } from '@/helpers/index'
 import { Col, Form, Button } from 'react-bootstrap'
-//******************************************************** */
-//@TODO Изменить место загрузки картинки на сервер NEXTjs
-//******************************************************* */
+
 const CreateCategory = ({ token, filenames }) => {
   const router = useRouter()
   const [categoryData, setCategoryData] = useState({
@@ -102,7 +100,7 @@ const CreateCategory = ({ token, filenames }) => {
         </Button>
       </Col>
       <Col md={{ offset: 1, span: 6 }}>
-        <h1 className='text-primary'>
+        <h1 className='text-primary mt-4'>
           <FaPlus className='me-2' />
           Создать категорию
         </h1>

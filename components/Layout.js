@@ -12,8 +12,14 @@ const Layout = ({ title, keywords, description, children }) => {
         {keywords && <meta name='keywords' content={keywords} />}
       </Head>
       <Header />
-      <Row className='py-3'>{children}</Row>
-      <Footer />
+      <div className='layout-spacer shadow'>
+        <Container>
+          <Row className='d-flex'>{children}</Row>
+        </Container>
+        <div>
+          <Footer />
+        </div>
+      </div>
     </Container>
   )
 }

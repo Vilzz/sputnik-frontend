@@ -6,7 +6,6 @@ const Footer = () => {
   const router = useRouter()
   return (
     <footer className={styles.footer}>
-      <hr />
       {router.locale === 'ru-RU' ? (
         <>
           <p>Copyright &copy; Макетная студия "Спутник" 2021</p>

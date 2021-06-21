@@ -48,7 +48,7 @@ const Prices = ({ maket, token }) => {
       <ToastContainer />
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
-          <h2 className='text-primary mb-2 ms-2'>
+          <h2 className='text-primary mt-4 mb-2 ms-2'>
             <RiPriceTag2Line />
             Цены на макет <span className='fw-bold'>{maket.name}</span>
           </h2>

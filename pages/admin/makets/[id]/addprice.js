@@ -55,7 +55,7 @@ const Addprice = ({ token, maketId, defaultScales }) => {
       <ToastContainer />
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
-          <h2 className='text-primary'>
+          <h2 className='text-primary mt-4 mb-3'>
             <FaPlusSquare className='me-2' />
             Добавить цену для макета
           </h2>

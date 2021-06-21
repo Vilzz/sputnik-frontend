@@ -1,7 +1,12 @@
 .footer {
   margin: 10px 0;
+  padding: 30px;
   text-align: center;
   font-size: 0.8rem;
+  color: white;
+  background: linear-gradient( #569aff 5%, #0d6efd 95%);
+  min-height:120px;
+  font-weight: bold;
 }
 
 .footer p {
