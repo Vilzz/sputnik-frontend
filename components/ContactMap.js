@@ -4,7 +4,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import { FaGlobe, FaPhoneAlt, FaInstagram, FaVk } from 'react-icons/fa'
 import { GoGlobe } from 'react-icons/go'
 import { HiOutlineMail } from 'react-icons/hi'
-
 import {
   COORDS,
   BASEMAP,
