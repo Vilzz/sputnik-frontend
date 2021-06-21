@@ -11,12 +11,18 @@ import { TiArrowBackOutline } from 'react-icons/ti'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { parseCookies } from '@/helpers/index'
-import { API_URL } from '@/config/index'
+import { API_URL, SCALES } from '@/config/index'
 import { Form, Col, Row, Button } from 'react-bootstrap'
 import Modal from '@/components/Modal'
 import ImageUpload from '@/components/ImageUpload'
 
-const EditMaket = ({ token, maketImages, categories, maket }) => {
+const EditMaket = ({
+  token,
+  maketImages,
+  categories,
+  maket,
+  defaultScales,
+}) => {
   const router = useRouter()
   const [maketData, setMaketData] = useState({
     name: maket.name,
@@ -118,54 +124,17 @@ const EditMaket = ({ token, maketImages, categories, maket }) => {
           <Col md={{ span: 5, offset: 1 }}>
             <Form.Label className='me-3'>Выбери масштабы: </Form.Label>
             <Form.Group>
-              <Form.Check
-                inline
-                type='checkbox'
-                label='1:250'
-                name='1:250'
-                checked={scales.includes('1:250')}
-                onChange={(e) => checkBoxChange(e)}
-              />
-              <Form.Check
-                inline
-                type='checkbox'
-                label='1:144'
-                name='1:144'
-                checked={scales.includes('1:144')}
-                onChange={(e) => checkBoxChange(e)}
-              />
-              <Form.Check
-                inline
-                type='checkbox'
-                label='1:100'
-                name='1:100'
-                checked={scales.includes('1:100')}
-                onChange={(e) => checkBoxChange(e)}
-              />
-              <Form.Check
-                inline
-                type='checkbox'
-                label='1:72'
-                name='1:72'
-                checked={scales.includes('1:72')}
-                onChange={(e) => checkBoxChange(e)}
-              />
-              <Form.Check
-                inline
-                type='checkbox'
-                label='1:50'
-                name='1:50'
-                checked={scales.includes('1:50')}
-                onChange={(e) => checkBoxChange(e)}
-              />
-              <Form.Check
-                inline
-                type='checkbox'
-                label='1:25'
-                name='1:25'
-                checked={scales.includes('1:25')}
-                onChange={(e) => checkBoxChange(e)}
-              />
+              {defaultScales.map((scale) => (
+                <Form.Check
+                  inline
+                  type='checkbox'
+                  label={scale}
+                  name={scale}
+                  checked={scales.includes(scale)}
+                  onChange={(e) => checkBoxChange(e)}
+                  key={scale}
+                />
+              ))}
             </Form.Group>
           </Col>
           <Col>
@@ -300,6 +269,7 @@ const EditMaket = ({ token, maketImages, categories, maket }) => {
             <Form.Control
               as='select'
               name='category'
+              className='form-select'
               onChange={(e) => handleChange(e)}
             >
               <option value={maketData.category}>
@@ -386,6 +356,10 @@ const EditMaket = ({ token, maketImages, categories, maket }) => {
       </Modal>
     </Layout>
   )
+}
+
+EditMaket.defaultProps = {
+  defaultScales: SCALES,
 }
 
 export default AdminRoutesProtection(EditMaket)

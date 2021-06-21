@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 import { Card, Row, Col, Button } from 'react-bootstrap'
+import Link from 'next/link'
 
 const Vacancies = ({ vacancies }) => {
   const [isPublished, setIsPublished] = useState(
@@ -15,7 +16,7 @@ const Vacancies = ({ vacancies }) => {
   }
   return isPublished !== null ? (
     isPublished.map((vacancy) => (
-      <Col md={6}>
+      <Col md={6} key={vacancy._id}>
         <Card style={{ maxWidth: '540px' }}>
           <Row className='g-0'>
             <Col md={4}>
@@ -40,7 +41,9 @@ const Vacancies = ({ vacancies }) => {
               </Card.Body>
             </Col>
             <Card.Footer className='d-flex justify-content-center'>
-              <Button variant='primary'>Откликнуться</Button>
+              <Link href='/contacts'>
+                <Button as='a'>Откликнуться</Button>
+              </Link>
             </Card.Footer>
           </Row>
         </Card>

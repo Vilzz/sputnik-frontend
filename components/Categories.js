@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { GoGear, GoTrashcan } from 'react-icons/go'
-import { API_URL } from '@/config/index'
+import { API_URL, DEFAULT_CATEGORY_ID } from '@/config/index'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -56,7 +56,7 @@ const Categories = ({ categories, token }) => {
         </thead>
         <tbody>
           {categories
-            .filter((category) => category._id !== '60c594a53347701fc71ccf5f')
+            .filter((category) => category._id !== DEFAULT_CATEGORY_ID)
             //Скрыл служебную категорию, в которую попадают макеты при удаление их категории
             .map((category) => (
               <tr key={category._id}>

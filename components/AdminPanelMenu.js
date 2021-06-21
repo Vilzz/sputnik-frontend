@@ -65,6 +65,28 @@ const AdminPanelMenu = ({ title }) => {
             <a className='sidemenu-link'>Пользователи</a>
           </Link>
         </li>
+        <li
+          className={
+            router.pathname === '/admin/vacancies/create'
+              ? 'list-group-item d-flex justify-content-between align-items-start active'
+              : 'list-group-item d-flex justify-content-between align-items-start'
+          }
+        >
+          <Link href='/admin/vacancies/create'>
+            <a className='sidemenu-link'>Создать вакансию</a>
+          </Link>
+        </li>
+        <li
+          className={
+            router.pathname === '/admin/vacancies'
+              ? 'list-group-item d-flex justify-content-between align-items-start active'
+              : 'list-group-item d-flex justify-content-between align-items-start'
+          }
+        >
+          <Link href='/admin/vacancies'>
+            <a className='sidemenu-link'>Вакансии</a>
+          </Link>
+        </li>
       </ul>
     </div>
   )

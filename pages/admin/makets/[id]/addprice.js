@@ -6,15 +6,15 @@ import Layout from '@/components/Layout'
 import AdminRoutesProtection from '@/components/AdminRoutesProtection'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { API_URL } from '@/config/index'
+import { API_URL, SCALES } from '@/config/index'
 import { parseCookies } from '@/helpers/index'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import { FaPlusSquare, FaPlus } from 'react-icons/fa'
 import { TiArrowBackOutline } from 'react-icons/ti'
 
-const Addprice = ({ token, maketId }) => {
+const Addprice = ({ token, maketId, defaultScales }) => {
   const router = useRouter()
-  const [scale, setScale] = useState('')
+  const [scale, setScale] = useState('Выбери масштаб')
   const [price, setPrice] = useState({
     rub: {
       price: '',
@@ -26,23 +26,27 @@ const Addprice = ({ token, maketId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    if (scale === 'Выбери масштаб') {
+      toast.error(`Ошибка: Масштаб не выбран!)`)
+    } else {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+        const res = await axios.post(
+          `${API_URL}prices`,
+          { scale, price: { ...price }, maket: maketId },
+          config
+        )
+        toast.success('Цена добавлена успешно')
+        setTimeout(() => router.push(`/admin/makets/${maketId}/prices`), 1000)
+      } catch (error) {
+        toast.error(
+          `Ошибка: ${error.response.status} ${error.response.data.error})`
+        )
       }
-      const res = await axios.post(
-        `${API_URL}prices`,
-        { scale, price: { ...price }, maket: maketId },
-        config
-      )
-      toast.success('Цена добавлена успешно')
-      setTimeout(() => router.push(`/admin/makets/${maketId}/prices`), 1000)
-    } catch (error) {
-      toast.error(
-        `Ошибка: ${error.response.status} ${error.response.data.error})`
-      )
     }
   }
 
@@ -58,17 +62,26 @@ const Addprice = ({ token, maketId }) => {
           <Form onSubmit={(e) => handleSubmit(e)}>
             <Form.Group>
               <Form.Label>
-                Масштаб (варианты: 1:250 , 1:144, 1:100, 1:72, 1:50,1:25)
+                Масштаб (варианты: 1:250 ,1:144, 1:100, 1:72, 1:50, 1:25)
               </Form.Label>
               <Form.Control
                 size='sm'
+                as='select'
                 type='text'
+                className='form-select'
                 placeholder='Введи наименование масштаба'
-                value={scale}
                 required
                 onChange={(e) => setScale(e.target.value)}
-              />
+              >
+                <option>{scale}</option>
+                {defaultScales
+                  .filter((scl) => scl !== scale)
+                  .map((scl) => (
+                    <option key={scl}>{scl}</option>
+                  ))}
+              </Form.Control>
             </Form.Group>
+
             <Form.Group>
               <Form.Label>Цена масштаба в рублях</Form.Label>
               <Form.Control
@@ -112,7 +125,9 @@ const Addprice = ({ token, maketId }) => {
     </Layout>
   )
 }
-
+Addprice.defaultProps = {
+  defaultScales: SCALES,
+}
 export default AdminRoutesProtection(Addprice)
 
 export const getServerSideProps = async (ctx) => {

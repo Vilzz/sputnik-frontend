@@ -11,9 +11,9 @@ import AdminRoutesProtection from '@/components/AdminRoutesProtection'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { parseCookies } from '@/helpers/index'
-import { API_URL } from '@/config/index'
+import { API_URL, SCALES } from '@/config/index'
 
-const Editprice = ({ token, maketId, price }) => {
+const Editprice = ({ token, maketId, price, defaultScales }) => {
   const router = useRouter()
   const [scale, setScale] = useState(price.scale)
   const [priceData, setPriceData] = useState({
@@ -66,18 +66,27 @@ const Editprice = ({ token, maketId, price }) => {
               </Form.Label>
               <Form.Control
                 size='sm'
+                as='select'
                 type='text'
-                value={scale}
-                required
+                className='form-select mb-2'
                 onChange={(e) => setScale(e.target.value)}
-              />
+              >
+                <option>{scale}</option>
+                {defaultScales
+                  .filter((scl) => scl !== scale)
+                  .map((scl) => (
+                    <option key={scl}>{scl}</option>
+                  ))}
+              </Form.Control>
             </Form.Group>
+
             <Form.Group>
               <Form.Label>Цена масштаба в рублях</Form.Label>
               <Form.Control
                 size='sm'
                 type='text'
                 value={priceData.rub.price}
+                className='mb-2'
                 required
                 onChange={(e) =>
                   setPriceData({
@@ -87,6 +96,7 @@ const Editprice = ({ token, maketId, price }) => {
                 }
               />
             </Form.Group>
+
             <Form.Group>
               <Form.Label>Цена масштаба в долларах</Form.Label>
               <Form.Control
@@ -102,6 +112,7 @@ const Editprice = ({ token, maketId, price }) => {
                 }
               />
             </Form.Group>
+
             <div className='d-flex justify-content-center mt-3'>
               <Button type='submit' className='me-2 fw-bold'>
                 <FaRegSave className='me-3' />
@@ -119,6 +130,10 @@ const Editprice = ({ token, maketId, price }) => {
       </Row>
     </Layout>
   )
+}
+
+Editprice.defaultProps = {
+  defaultScales: SCALES,
 }
 
 export default AdminRoutesProtection(Editprice)

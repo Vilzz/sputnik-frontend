@@ -17,7 +17,7 @@
     "next": "^10.2.3",
     "next-connect": "^0.10.1",
     "react": "17.0.2",
-    "react-bootstrap": "^1.6.0",
+    "react-bootstrap": "^1.6.1",
     "react-dom": "17.0.2",
     "react-geocode": "^0.2.3",
     "react-icons": "^4.2.0",

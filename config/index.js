@@ -4,6 +4,9 @@ export const API_URL =
 export const NEXT_URL =
   process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000/'
 
+export const SCALES = ['1:250', '1:144', '1:100', '1:72', '1:50', '1:25']
+export const DEFAULT_CATEGORY_ID = '60c594a53347701fc71ccf5f'
+
 export const PHONE = '+79270002222'
 export const EMAIL = 'anton@mail.ru'
 export const ADDRESS = '443000 РОССИЯ Г.САМАРА УЛ. АВРОРЫ Д.1'
