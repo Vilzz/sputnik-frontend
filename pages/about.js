@@ -2,7 +2,7 @@ import Layout from '@/components/Layout'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { Col, Row, Card } from 'react-bootstrap'
-import { FaHistory } from 'react-icons/fa'
+import { FaInfoCircle } from 'react-icons/fa'
 
 const About = () => {
   const router = useRouter()
@@ -17,7 +17,7 @@ const About = () => {
       keywords='макеты,сувенирные макеты, макеты космических аппаратов, фабрика моделей'
     >
       <h1 className='my-3 ms-3 text-primary'>
-        <FaHistory className='me-2' />О компании "Спутник"
+        <FaInfoCircle className='me-2' />О компании "Спутник"
       </h1>
       <hr />
       {router.locale === 'ru-RU' ? (

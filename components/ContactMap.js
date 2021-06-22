@@ -8,6 +8,7 @@ import {
   COORDS,
   BASEMAP,
   ADDRESS,
+  ADDRESS_EN,
   PHONE,
   EMAIL,
   SITE,
@@ -21,9 +22,11 @@ const icon = Leaflet.icon({
   shadowUrl: '/images/map/marker-shadow.png',
 })
 const ContactMap = ({
+  locale,
   position,
   basemap,
   address,
+  address_en,
   phone,
   email,
   site,
@@ -36,28 +39,28 @@ const ContactMap = ({
         <ListGroup.Item className='d-flex justify-content-between'>
           <strong>
             <GoGlobe className='me-2' />
-            Адрес:
+            {locale === 'ru-RU' ? 'Адрес:' : 'Address:'}
           </strong>
-          <span>{address}</span>
+          <span>{locale === 'ru-RU' ? address : address_en}</span>
         </ListGroup.Item>
         <ListGroup.Item className='d-flex justify-content-between'>
           <strong>
             <FaPhoneAlt className='me-2' />
-            Телефон:
+            {locale === 'ru-RU' ? 'Телефон:' : 'Phone:'}
           </strong>
           <span>{phone}</span>
         </ListGroup.Item>
         <ListGroup.Item className='d-flex justify-content-between'>
           <strong>
             <HiOutlineMail className='me-2' />
-            Электронная почта:
+            {locale === 'ru-RU' ? 'Электронная почта:' : 'E-mail:'}
           </strong>
           <span>{email}</span>
         </ListGroup.Item>
         <ListGroup.Item className='d-flex justify-content-between'>
           <strong>
             <FaGlobe className='me-2' />
-            Сайт:
+            {locale === 'ru-RU' ? 'Сайт:' : 'Site:'}
           </strong>
           <span>{site}</span>
         </ListGroup.Item>
@@ -84,8 +87,17 @@ const ContactMap = ({
         <Marker position={position} icon={icon}>
           <Popup position={position}>
             <div className='d-flex flex-column align-items-center'>
-              <h5 className='lh-1'>Макетная компания Спутник</h5>
-              <p className='lh-1 text-muted'>{ADDRESS}</p>
+              {locale === 'ru-RU' ? (
+                <>
+                  <h5 className='lh-1'>Макетная компания Спутник</h5>
+                  <p className='lh-1 text-muted'>{address}</p>
+                </>
+              ) : (
+                <>
+                  <h5 className='lh-1'>Sputnik maket company</h5>
+                  <p className='lh-1 text-muted'>{address_en}</p>
+                </>
+              )}
             </div>
           </Popup>
         </Marker>
@@ -98,6 +110,7 @@ ContactMap.defaultProps = {
   position: COORDS,
   basemap: BASEMAP,
   address: ADDRESS,
+  address_en: ADDRESS_EN,
   phone: PHONE,
   email: EMAIL,
   site: SITE,

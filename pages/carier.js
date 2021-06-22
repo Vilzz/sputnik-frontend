@@ -18,7 +18,6 @@ const Carier = ({ vacancies }) => {
         Вакансии компании
       </h1>
       <hr />
-
       <Vacancies vacancies={vacancies} />
     </Layout>
   )

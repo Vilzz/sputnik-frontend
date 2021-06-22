@@ -9,20 +9,22 @@ const Contacts = () => {
   const router = useRouter()
   return (
     <Layout
-      title={router.locale === 'ru-RU' ? 'Контактная информация' : 'Contacts'}
+      title={
+        router.locale === 'ru-RU' ? 'Контактная информация' : 'Contact info'
+      }
       description={
         router.locale === 'ru-RU'
           ? 'Контактная информация макетной студии Спутник'
-          : 'Sputnik studio contacts'
+          : 'Sputnik maket studio contacts'
       }
       keywords='контакты, спутник макеты, макеты на заказ, model studio sputnik'
     >
       <h1 className='text-primary my-3 ms-3'>
         <ImAddressBook className='me-2' />
-        Контактная информация
+        {router.locale === 'ru-RU' ? 'Контактная информация' : 'Contact info'}
       </h1>
       <hr />
-      <ContactMap />
+      <ContactMap locale={router.locale} />
     </Layout>
   )
 }

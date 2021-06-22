@@ -3,8 +3,8 @@
   padding: 30px;
   text-align: center;
   font-size: 0.8rem;
-  color: white;
-  background: linear-gradient( #569aff 5%, #0d6efd 95%);
+  color: rgb(60, 60, 60);
+  background: linear-gradient( #f0f0f0 1%, #d0d0d0 95%);
   min-height:120px;
   font-weight: bold;
 }
