@@ -17,7 +17,7 @@ const Carier = ({ vacancies }) => {
         <FaWrench className='me-2' />
         Вакансии компании
       </h1>
-      <hr />
+      <hr className='mb-5' />
       <Vacancies vacancies={vacancies} />
     </Layout>
   )

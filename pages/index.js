@@ -18,12 +18,12 @@ const Home = ({ categories }) => {
       }
       keywords='каталог, catalog, макеты, makets'
     >
+      <h1 className='my-3 ms-3 text-primary'>
+        <ImRocket className='me-2' />
+        {router.locale === 'ru-RU' ? 'Каталог макетов' : 'Catalog of makets'}
+      </h1>
+      <hr />
       <Col>
-        <h1 className='my-3 ms-3 text-primary'>
-          <ImRocket className='me-2' />
-          {router.locale === 'ru-RU' ? 'Каталог макетов' : 'Catalog of makets'}
-        </h1>
-        <hr />
         <div className='d-flex justify-content-evenly align-items-center flex-wrap g-5 m-4'>
           {categories
             .filter((category) => category.showinmenu === true)

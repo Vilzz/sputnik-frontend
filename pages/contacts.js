@@ -19,11 +19,11 @@ const Contacts = () => {
       }
       keywords='контакты, спутник макеты, макеты на заказ, model studio sputnik'
     >
-      <h1 className='text-primary my-3 ms-3'>
+      <h1 className='text-primary my-3 ms-5'>
         <ImAddressBook className='me-2' />
         {router.locale === 'ru-RU' ? 'Контактная информация' : 'Contact info'}
       </h1>
-      <hr />
+      <hr className='mb-4' />
       <ContactMap locale={router.locale} />
     </Layout>
   )
