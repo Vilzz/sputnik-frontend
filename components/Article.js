@@ -21,7 +21,7 @@ const Article = ({ articles }) => {
       {articles
         .filter((article) => article.isPublished === true)
         .map((article) => (
-          <div className={styles.my_card}>
+          <div className={styles.my_card} key={article._id}>
             <div className={styles.my_image}>
               <Image src={article.image} width={350} height={250} />
             </div>

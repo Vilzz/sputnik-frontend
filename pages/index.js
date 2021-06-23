@@ -22,7 +22,10 @@ const Home = ({ categories }) => {
         <ImRocket className='me-2' />
         {router.locale === 'ru-RU' ? 'Каталог макетов' : 'Catalog of makets'}
       </h1>
-      <hr />
+      <div className='px-4'>
+        <hr />
+      </div>
+
       <Col>
         <div className='d-flex justify-content-evenly align-items-center flex-wrap g-5 m-4'>
           {categories

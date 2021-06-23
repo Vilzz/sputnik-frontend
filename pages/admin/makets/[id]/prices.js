@@ -9,7 +9,7 @@ import { TiArrowBackOutline } from 'react-icons/ti'
 import { API_URL } from '@/config/index'
 import AdminRoutesProtection from '@/components/AdminRoutesProtection'
 import Layout from '@/components/Layout'
-import { Row, Col, Table } from 'react-bootstrap'
+import { Row, Col, Table, Button } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { parseCookies } from '@/helpers/index'
@@ -53,7 +53,7 @@ const Prices = ({ maket, token }) => {
             Цены на макет <span className='fw-bold'>{maket.name}</span>
           </h2>
           {maket.prices.length > 0 ? (
-            <Table striped bordered hover className='table-gray'>
+            <Table striped bordered responsive hover className='table-gray'>
               <thead>
                 <tr className='table-dark'>
                   <th>Масштаб</th>
@@ -82,20 +82,22 @@ const Prices = ({ maket, token }) => {
                     <td className='text-center'>
                       {formatDate(price.createdAt)}
                     </td>
-                    <td className='d-flex justify-content-evenly'>
-                      <Link href={`/admin/makets/${maket._id}/${price._id}`}>
-                        <a className='btn btn-xs btn-primary me-1'>
-                          <GoGear />
-                        </a>
-                      </Link>
-
-                      <button
-                        className='btn btn-xs btn-danger'
-                        data={price._id}
-                        onClick={(e) => deletePrice(e)}
-                      >
-                        <GoTrashcan data={price._id} />
-                      </button>
+                    <td>
+                      <div className='d-flex'>
+                        <Link href={`/admin/makets/${maket._id}/${price._id}`}>
+                          <Button as='a' className='btn-xs me-1'>
+                            <GoGear />
+                          </Button>
+                        </Link>
+                        <Button
+                          variant='danger'
+                          className='btn-xs'
+                          data={price._id}
+                          onClick={(e) => deletePrice(e)}
+                        >
+                          <GoTrashcan data={price._id} />
+                        </Button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -108,7 +110,7 @@ const Prices = ({ maket, token }) => {
       </Row>
       <Row>
         <Col
-          className='d-flex justify-content-evenly'
+          className='d-flex justify-content-evenly mt-3'
           md={{ span: 4, offset: 4 }}
         >
           <Link href={`/admin/makets/${maket._id}/addprice`}>

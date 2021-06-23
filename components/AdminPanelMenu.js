@@ -87,6 +87,28 @@ const AdminPanelMenu = ({ title }) => {
             <a className='sidemenu-link'>Вакансии</a>
           </Link>
         </li>
+        <li
+          className={
+            router.pathname === '/admin/articles/create'
+              ? 'list-group-item d-flex justify-content-between align-items-start active'
+              : 'list-group-item d-flex justify-content-between align-items-start'
+          }
+        >
+          <Link href='/admin/articles/create'>
+            <a className='sidemenu-link'>Создать статью</a>
+          </Link>
+        </li>
+        <li
+          className={
+            router.pathname === '/admin/articles'
+              ? 'list-group-item d-flex justify-content-between align-items-start active'
+              : 'list-group-item d-flex justify-content-between align-items-start'
+          }
+        >
+          <Link href='/admin/articles'>
+            <a className='sidemenu-link'>Статьи</a>
+          </Link>
+        </li>
       </ul>
     </div>
   )

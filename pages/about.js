@@ -19,7 +19,9 @@ const About = () => {
       <h1 className='my-3 ms-3 text-primary'>
         <FaInfoCircle className='me-2' />О компании "Спутник"
       </h1>
-      <hr className='mb-5' />
+      <div className='px-4 mb-3'>
+        <hr />
+      </div>
       {router.locale === 'ru-RU' ? (
         <Col className='d-flex justify-content-center'>
           <Card style={{ maxWidth: '1200px' }}>

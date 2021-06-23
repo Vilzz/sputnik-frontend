@@ -36,7 +36,7 @@ a {
   border: 1px solid #000;
 }
 
-  .layout-spacer{
+.layout-spacer{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
@@ -44,6 +44,7 @@ a {
     min-height: 86vh;
    
   }
+
 .category_card{
   width: 16rem;
   margin-bottom: 30px;
@@ -145,3 +146,11 @@ td{
     text-align: center;
     color: darkblue;
   }
+
+  @media (max-width: 600px) {
+    .article_group{
+      max-width: 190px;
+      margin-bottom: 20px;
+  }
+  }
+  

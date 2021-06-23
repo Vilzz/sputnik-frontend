@@ -13,11 +13,13 @@ const Carier = ({ vacancies }) => {
         router.locale === 'ru-RU' ? 'Вакансии компании' : 'Company hire list'
       }
     >
-      <h1 className='text-primary my-3 ms-3'>
+      <h1 className='text-primary mt-3 mb-2 ms-3'>
         <FaWrench className='me-2' />
         Вакансии компании
       </h1>
-      <hr className='mb-5' />
+      <div className='px-4 mb-3'>
+        <hr />
+      </div>
       <Vacancies vacancies={vacancies} />
     </Layout>
   )

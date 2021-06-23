@@ -8,12 +8,22 @@ import { FaNewspaper } from 'react-icons/fa'
 const News = ({ articles }) => {
   const router = useRouter()
   return (
-    <Layout>
-      <h1 className='text-primary my-3 ms-5'>
+    <Layout
+      title={router.locale === 'ru-RU' ? 'Новости кампании' : 'Company blog'}
+      description={
+        router.locale === 'ru-RU'
+          ? 'Новости макетной студии Спутник'
+          : 'Sputnik company blog '
+      }
+      keywords='новости о макетах, новые макеты, макеты ракет, spaceship makets'
+    >
+      <h1 className='text-primary mt-3 mb-2 ms-5'>
         <FaNewspaper className='me-2' />
         {router.locale === 'ru-RU' ? 'Новости' : 'News'}
       </h1>
-      <hr className='mb-5' />
+      <div className='px-4 mb-3'>
+        <hr />
+      </div>
       <Article articles={articles} />
     </Layout>
   )
