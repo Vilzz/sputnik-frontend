@@ -38,10 +38,9 @@ const ArticlesList = ({ articles, token }) => {
       <ToastContainer />
       {articles.map((article) => (
         <Col
-          xs={12}
-          md={6}
+          xs={{ span: 7, offset: 2 }}
+          md={{ span: 6, offset: 0 }}
           key={article._id}
-          className='d-flex justify-content-center mb-3'
         >
           <ListGroup className='article_group'>
             <ListGroup.Item>
