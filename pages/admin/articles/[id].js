@@ -19,7 +19,13 @@ const EditArticle = ({ token, article, articleImages }) => {
   const router = useRouter()
   const [articleData, setArticleData] = useState({
     title: article.title,
+    title_en: article.title_en,
     text: article.text,
+    text_en: article.text_en,
+    keywords: article.keywords,
+    keywords_en: article.keywords_en,
+    description: article.description,
+    description_en: article.description_en,
     isPublished: article.isPublished,
     image: article.image,
   })
@@ -82,29 +88,131 @@ const EditArticle = ({ token, article, articleImages }) => {
                 }
               />
             </Form.Group>
-            <Form.Group className='mb-3'>
-              <Form.Label>Заголовок статьи</Form.Label>
-              <Form.Control
-                type='text'
-                value={articleData.title}
-                name='title'
-                onChange={(e) => {
-                  handleChange(e)
-                }}
-              />
-            </Form.Group>
-            <Form.Group className='mb-3'>
-              <Form.Label>Текст статьи</Form.Label>
-              <Form.Control
-                type='text'
-                as='textarea'
-                value={articleData.text}
-                name='text'
-                onChange={(e) => {
-                  handleChange(e)
-                }}
-              />
-            </Form.Group>
+            <Row>
+              <Col md={6}>
+                <Form.Group className='mb-3'>
+                  <Form.Label>Заголовок статьи</Form.Label>
+                  <Form.Control
+                    size='sm'
+                    type='text'
+                    value={articleData.title}
+                    name='title'
+                    onChange={(e) => {
+                      handleChange(e)
+                    }}
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className='mb-3'>
+                  <Form.Label>Заголовок статьи на английском</Form.Label>
+                  <Form.Control
+                    size='sm'
+                    type='text'
+                    value={articleData.title_en}
+                    name='title_en'
+                    onChange={(e) => {
+                      handleChange(e)
+                    }}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={6}>
+                <Form.Group className='mb-3'>
+                  <Form.Label>Текст статьи</Form.Label>
+                  <Form.Control
+                    size='sm'
+                    type='text'
+                    as='textarea'
+                    value={articleData.text}
+                    name='text'
+                    onChange={(e) => {
+                      handleChange(e)
+                    }}
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className='mb-3'>
+                  <Form.Label>Текст статьи на английском</Form.Label>
+                  <Form.Control
+                    size='sm'
+                    type='text'
+                    as='textarea'
+                    value={articleData.text_en}
+                    name='text_en'
+                    onChange={(e) => {
+                      handleChange(e)
+                    }}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={6}>
+                <Form.Group className='mb-3'>
+                  <Form.Label>Описание статьи</Form.Label>
+                  <Form.Control
+                    size='sm'
+                    type='text'
+                    value={articleData.description}
+                    name='description'
+                    onChange={(e) => {
+                      handleChange(e)
+                    }}
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className='mb-3'>
+                  <Form.Label>Описание статьи на английском</Form.Label>
+                  <Form.Control
+                    size='sm'
+                    type='text'
+                    value={articleData.description_en}
+                    name='description_en'
+                    onChange={(e) => {
+                      handleChange(e)
+                    }}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={6}>
+                <Form.Group className='mb-3'>
+                  <Form.Label>Ключевые слова статьи через запятую</Form.Label>
+                  <Form.Control
+                    size='sm'
+                    type='text'
+                    value={articleData.keywords}
+                    name='keywords'
+                    onChange={(e) => {
+                      handleChange(e)
+                    }}
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group className='mb-3'>
+                  <Form.Label>
+                    Ключевые слова статьи на английском через запятую
+                  </Form.Label>
+                  <Form.Control
+                    size='sm'
+                    type='text'
+                    value={articleData.keywords_en}
+                    name='keywords_en'
+                    onChange={(e) => {
+                      handleChange(e)
+                    }}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+
             <Form.Group>
               <Row>
                 <Col

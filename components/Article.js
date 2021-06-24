@@ -27,9 +27,9 @@ const Article = ({ articles }) => {
             </div>
             <div>
               <div className='my_card_date'>
-                Sputnik /{' '}
+                Sputniknews{' '}
                 <strong className='text-primary fs-6'>
-                  {formatDate(article.createdAt)}
+                  &#9613;{formatDate(article.createdAt)}
                 </strong>
               </div>
               <h3 className='my_card_title'> {article.title}</h3>

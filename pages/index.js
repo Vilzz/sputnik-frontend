@@ -41,7 +41,7 @@ const Home = ({ categories }) => {
 export default Home
 
 export const getServerSideProps = async () => {
-  const res = await axios.get(`${API_URL}categories`)
+  const res = await axios.get(`${API_URL}categories?sort=order`)
   return {
     props: {
       categories: res.data.data,
