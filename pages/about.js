@@ -17,7 +17,10 @@ const About = () => {
       keywords='макеты,сувенирные макеты, макеты космических аппаратов, фабрика моделей'
     >
       <h1 className='my-3 ms-3 text-primary'>
-        <FaInfoCircle className='me-2' />О компании "Спутник"
+        <FaInfoCircle className='me-2' />
+        {router.locale === 'ru-RU'
+          ? 'О компании "Спутник"'
+          : 'About sputnik company'}
       </h1>
       <div className='px-4 mb-3'>
         <hr />
@@ -72,7 +75,55 @@ const About = () => {
         </Col>
       ) : (
         // Todo: Добавить описание страници О нас на английском языке
-        <h1>About Sputnik company</h1>
+        <Col className='d-flex justify-content-center'>
+          <Card style={{ maxWidth: '1200px' }}>
+            <Row className='g-0'>
+              <Col md={4} className='p-3'>
+                <Image
+                  src='/images/about_us_400x600.jpg'
+                  width='360px'
+                  height='480px'
+                />
+              </Col>
+              <Col md={8} style={{ maxWidth: '660px' }}>
+                <Card.Body>
+                  <Card.Text className='lh-sm'>
+                    <strong>Maket company Sputnik</strong> - Lorem ipsum dolor
+                    sit amet consectetur adipisicing elit. Id temporibus ducimus
+                    reprehenderit possimus repellendus magni non. Repellat
+                    fugiat eligendi ipsa aliquam distinctio a odio dignissimos
+                    quisquam soluta velit ratione ullam alias labore, laboriosam
+                    architecto quam aut placeat incidunt at? Tempora?
+                  </Card.Text>
+                  <Card.Text className='lh-sm'>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                    Esse cumque, optio blanditiis culpa voluptate rerum
+                    voluptates aliquam explicabo natus minus!
+                  </Card.Text>
+                  <Card.Text className='lh-sm'>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Pariatur consectetur, non impedit aliquid deleniti illo
+                    assumenda praesentium aliquam est sequi iste ducimus nemo
+                    ratione cumque delectus neque sapiente eum soluta quo esse,
+                    labore animi necessitatibus.
+                  </Card.Text>
+                  <Card.Text className='lh-sm'>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Iste hic rem voluptas animi saepe qui labore ex, consectetur
+                    magnam iure beatae ad eveniet quaerat dolorum, iusto numquam
+                    et accusamus enim, nemo eius pariatur aspernatur voluptatem
+                    aut sit? Error enim eveniet, ipsa atque mollitia cupiditate
+                    fugit.
+                  </Card.Text>
+                  <Card.Text className='lh-sm'>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Blanditiis soluta, omnis quam molestias incidunt enim.
+                  </Card.Text>
+                </Card.Body>
+              </Col>
+            </Row>
+          </Card>
+        </Col>
       )}
     </Layout>
   )

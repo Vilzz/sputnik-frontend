@@ -1,6 +1,4 @@
 import axios from 'axios'
-import { format } from 'date-fns'
-import { ru } from 'date-fns/locale'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { GoPlus, GoGear, GoTrashcan } from 'react-icons/go'
@@ -13,12 +11,10 @@ import { Row, Col, Table, Button } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { parseCookies } from '@/helpers/index'
+import { formatDate } from '@/helpers/index'
 
 const Prices = ({ maket, token }) => {
   const router = useRouter()
-  const formatDate = (date) => {
-    return format(new Date(date), 'dd MMMM yyyy k:mm:ss', { locale: ru })
-  }
   const deletePrice = async (e) => {
     let id
     if (e.target.nodeName === 'path') {

@@ -1,13 +1,11 @@
 import Image from 'next/image'
-import { format } from 'date-fns'
-import { ru } from 'date-fns/locale'
+import { useRouter } from 'next/router'
 import { Col } from 'react-bootstrap'
+import { formatDate } from '@/helpers/index'
 import Link from 'next/link'
 
 const Article = ({ articles }) => {
-  const formatDate = (dt) => {
-    return format(new Date(dt), 'k:mm:ss dd MMMM yyyy', { locale: ru })
-  }
+  const router = useRouter()
   const trancateText = (txt) => {
     return (
       txt
@@ -32,8 +30,15 @@ const Article = ({ articles }) => {
                   &#9613;{formatDate(article.createdAt)}
                 </strong>
               </div>
-              <h3 className='my_card_title'> {article.title}</h3>
-              <p className='my_card_text'>{trancateText(article.text)}</p>
+              <h3 className='my_card_title'>
+                {' '}
+                {router.locale === 'ru-RU' ? article.title : article.title_en}
+              </h3>
+              <p className='my_card_text'>
+                {trancateText(
+                  router.locale === 'ru-RU' ? article.text : article.text_en
+                )}
+              </p>
               <Link href={`/news/${article.slug}`}>
                 <button className='my_button'>Подробнее...</button>
               </Link>

@@ -70,7 +70,7 @@ const Header = () => {
         </NavbarBrand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' className='me-3' />
         <Navbar.Collapse id='basic-navbar-nav' className='justify-content-end'>
-          <Nav className='ms-3 me-5'>
+          <Nav className='ms-3 me-5 ps-2'>
             {Menu(router.locale)}
             {user ? (
               // Если пользователь авторизован
@@ -95,7 +95,11 @@ const Header = () => {
                   </li>
                 )}
                 <li className='nav-item'>
-                  <a className='btn nav-link' onClick={() => logout()}>
+                  <a
+                    className='nav-link'
+                    onClick={() => logout()}
+                    style={{ cursor: 'pointer' }}
+                  >
                     {router.locale === 'ru-RU' ? 'Выход' : 'Logout'}
                   </a>
                 </li>

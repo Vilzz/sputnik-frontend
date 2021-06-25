@@ -1,10 +1,9 @@
 import axios from 'axios'
 import Link from 'next/link'
-import { format } from 'date-fns'
-import { ru } from 'date-fns/locale'
 import { useRouter } from 'next/router'
 import { Row, Col, Table } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify'
+import { formatDate } from '@/helpers/index'
 import 'react-toastify/dist/ReactToastify.css'
 import AdminRoutesProtection from '@/components/AdminRoutesProtection'
 import AdminPanelMenu from '@/components/AdminPanelMenu'
@@ -15,9 +14,6 @@ import { GoGear, GoTrashcan } from 'react-icons/go'
 
 const Users = ({ token, users }) => {
   const router = useRouter()
-  const formatDate = (date) => {
-    return format(new Date(date), 'dd MMMM yyyy k:mm:ss', { locale: ru })
-  }
   const deleteUser = async (e) => {
     let id
     if (e.target.nodeName === 'path') {

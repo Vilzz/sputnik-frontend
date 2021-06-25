@@ -194,7 +194,14 @@ td{
   .article_text{
     max-width:700px;
   }
+  .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover{
+    color:#0d6efd;
+  }
+  
   @media (max-width: 600px) {
+    .nav-link::before{
+      content:"‣ ";
+    }
     
   .my_card {
     grid-template-columns: 2fr;

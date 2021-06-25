@@ -42,61 +42,89 @@ const RegisterPage = () => {
           <div className='mb-4'>
             <h1 className='text-primary display-4'>
               <ImUserPlus className='me-2' />
-              Регистрация
+              {router.locale === 'ru-RU' ? 'Регистрация' : 'Create account'}
             </h1>
           </div>
           <hr />
           <Form onSubmit={(e) => handleSubmit(e)}>
             <Form.Group controlId='formBasicName' className='mb-3'>
-              <Form.Label>Имя пользователя</Form.Label>
+              <Form.Label>
+                {router.locale === 'ru-RU' ? 'Имя пользователя' : 'Username'}
+              </Form.Label>
               <Form.Control
                 type='text'
                 name='username'
                 value={username}
                 required
-                placeholder='Введите имя пользователя'
+                placeholder={
+                  router.locale === 'ru-RU'
+                    ? 'Введите имя пользователя'
+                    : 'Provide username'
+                }
                 onChange={(e) => setUsername(e.target.value)}
               />
             </Form.Group>
             <Form.Group controlId='formBasicEmail' className='mb-3'>
-              <Form.Label>Электронная почта</Form.Label>
+              <Form.Label>
+                {router.locale === 'ru-RU' ? 'Электронная почта' : 'Email'}
+              </Form.Label>
               <Form.Control
                 type='email'
                 name='email'
                 value={email}
                 required
-                placeholder='Введите адрес эл. почты'
+                placeholder={
+                  router.locale === 'ru-RU'
+                    ? 'Введите адрес эл. почты'
+                    : 'Provide your email'
+                }
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
             <Form.Group controlId='formBasicPassword' className='mb-3'>
-              <Form.Label>Пароль</Form.Label>
+              <Form.Label>
+                {router.locale === 'ru-RU' ? 'Пароль' : 'Password'}
+              </Form.Label>
               <Form.Control
                 type='password'
                 name='password'
                 value={password}
-                placeholder='Введите пароль'
+                placeholder={
+                  router.locale === 'ru-RU'
+                    ? 'Введите пароль'
+                    : 'Enter password'
+                }
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
             <Form.Group controlId='formBasicPassword2' className='mb-3'>
-              <Form.Label>Пароль</Form.Label>
+              <Form.Label>
+                {router.locale === 'ru-RU' ? 'Пароль' : 'Password'}
+              </Form.Label>
               <Form.Control
                 type='password'
                 name='password'
                 value={password2}
-                placeholder='Повторите пароль'
+                placeholder={
+                  router.locale === 'ru-RU'
+                    ? 'Повторите пароль'
+                    : 'Repeat your password'
+                }
                 onChange={(e) => setPassword2(e.target.value)}
               />
             </Form.Group>
             <Button variant='primary' type='submit'>
-              Зарегистрироваться
+              {router.locale === 'ru-RU' ? 'Зарегистрироваться' : 'Sign Up'}
             </Button>
           </Form>
           <h5 className='mt-3'>
-            Уже зарегистрирован?{' '}
+            {router.locale === 'ru-RU'
+              ? 'Уже зарегистрирован?'
+              : 'Allready registered?'}
             <Link href='/account/login'>
-              <a className='lead text-primary ms-2'>Войти</a>
+              <a className='lead text-primary ms-2'>
+                {router.locale === 'ru-RU' ? 'Войти' : 'Login'}
+              </a>
             </Link>
           </h5>
         </Col>

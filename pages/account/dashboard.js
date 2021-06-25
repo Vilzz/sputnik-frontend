@@ -28,7 +28,9 @@ const Dashboard = ({ token, user }) => {
         <Row>
           <h2 className='text-primary my-3 ms-3'>
             <FaUserAstronaut className='me-2' />
-            Информация о пользователе
+            {router.locale === 'ru-RU'
+              ? 'Информация о пользователе'
+              : 'User info'}
           </h2>
           <hr />
         </Row>
@@ -36,25 +38,39 @@ const Dashboard = ({ token, user }) => {
           <Col md={12}>
             <ListGroup>
               <ListGroup.Item className='d-flex justify-content-between'>
-                <strong>Дата регистрации: </strong>
+                <strong>
+                  {router.locale === 'ru-RU'
+                    ? 'Дата регистрации:'
+                    : 'Registered'}
+                </strong>
                 {formatDate(user.createdAt)}
               </ListGroup.Item>
             </ListGroup>
             <ListGroup>
               <ListGroup.Item className='d-flex justify-content-between'>
-                <strong>Имя пользователя: </strong>
+                <strong>
+                  {router.locale === 'ru-RU' ? 'Имя пользователя:' : 'Username'}
+                </strong>
                 {user.name}
               </ListGroup.Item>
             </ListGroup>
             <ListGroup>
               <ListGroup.Item className='d-flex justify-content-between'>
-                <strong>Электронная почта: </strong>
+                <strong>
+                  {router.locale === 'ru-RU'
+                    ? 'Электронная почта:'
+                    : 'User email'}
+                </strong>
                 {user.email}
               </ListGroup.Item>
             </ListGroup>
             <ListGroup>
               <ListGroup.Item className='d-flex justify-content-between'>
-                <strong>Роль пользователя: </strong>
+                <strong>
+                  {router.locale === 'ru-RU'
+                    ? 'Роль пользователя:'
+                    : 'User role'}{' '}
+                </strong>
                 {user.role}
               </ListGroup.Item>
             </ListGroup>

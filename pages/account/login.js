@@ -40,34 +40,49 @@ const LoginPage = () => {
           <hr />
           <Form onSubmit={(e) => handleSubmit(e)}>
             <Form.Group controlId='formBasicEmail' className='mb-3'>
-              <Form.Label>Электронная почта</Form.Label>
+              <Form.Label>
+                {' '}
+                {router.locale === 'ru-RU' ? 'Электронная почта' : 'Email'}
+              </Form.Label>
               <Form.Control
                 type='email'
                 name='email'
                 value={email}
                 required
-                placeholder='Введите адрес эл. почты'
+                placeholder={
+                  router.locale === 'ru-RU'
+                    ? 'Введите адрес эл. почты'
+                    : 'Enter your email'
+                }
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Form.Group>
             <Form.Group controlId='formBasicPassword' className='mb-3'>
-              <Form.Label>Пароль</Form.Label>
+              <Form.Label>
+                {router.locale === 'ru-RU' ? 'Пароль' : 'Password'}
+              </Form.Label>
               <Form.Control
                 type='password'
                 name='password'
                 value={password}
-                placeholder='Введите пароль'
+                placeholder={
+                  router.locale === 'ru-RU'
+                    ? 'Введите пароль'
+                    : 'Enter a password'
+                }
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
             <Button variant='primary' type='submit'>
-              Войти
+              {router.locale === 'ru-RU' ? 'Войти' : 'Enter'}
             </Button>
           </Form>
           <h5 className='mt-3'>
-            Нет аккаунта?
+            {router.locale === 'ru-RU' ? 'Нет аккаунта?' : 'Not register?'}
             <Link href='/account/register'>
-              <a className='lead text-primary ms-2'>Зарегистрироваться</a>
+              <a className='lead text-primary ms-2'>
+                {router.locale === 'ru-RU' ? 'Зарегистрироваться' : 'Register'}
+              </a>
             </Link>
           </h5>
         </Col>
