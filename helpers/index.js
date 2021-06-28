@@ -10,6 +10,10 @@ export function parseCookies(req) {
   }
 }
 
-export const formatDate = (dt) => {
-  return format(new Date(dt), 'dd MMMM yyyy k:mm:ss', { locale: ru })
+export const formatDate = (dt, time = true) => {
+  if (time) {
+    return format(new Date(dt), 'dd MMMM yyyy k:mm:ss', { locale: ru })
+  } else {
+    return format(new Date(dt), 'dd MMMM yyyy', { locale: ru })
+  }
 }

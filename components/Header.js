@@ -15,6 +15,13 @@ const Header = () => {
         <li className='nav-item'>
           <Link href='/'>
             <a className='nav-link'>
+              {locale === 'ru-RU' ? 'Главная' : 'Home'}
+            </a>
+          </Link>
+        </li>
+        <li className='nav-item'>
+          <Link href='/catalog'>
+            <a className='nav-link'>
               {locale === 'ru-RU' ? 'Каталог' : 'Catalog'}
             </a>
           </Link>
@@ -26,13 +33,16 @@ const Header = () => {
             </a>
           </Link>
         </li>
-        <li className='nav-item'>
-          <Link href='/carier'>
-            <a className='nav-link'>
-              {locale === 'ru-RU' ? 'Карьера' : 'Carier'}
-            </a>
-          </Link>
-        </li>
+        {router.locale === 'ru-RU' && (
+          <li className='nav-item'>
+            <Link href='/carier'>
+              <a className='nav-link'>
+                {locale === 'ru-RU' ? 'Карьера' : 'Carier'}
+              </a>
+            </Link>
+          </li>
+        )}
+
         <li className='nav-item'>
           <Link href='/news'>
             <a className='nav-link'>
@@ -59,8 +69,8 @@ const Header = () => {
             <a>
               <Image
                 src='/sputnik.svg'
-                width='138'
-                height='110'
+                width='240' //138
+                height='169' //110
                 alt='Sputnik Logo'
                 priority='true'
                 className='navbar-brand py-0'
@@ -68,6 +78,14 @@ const Header = () => {
             </a>
           </Link>
         </NavbarBrand>
+        <div className='lang-flag'>
+          <a href='/en' className='me-2'>
+            <Image src='/images/gb.svg' width={20} height={15} />
+          </a>
+          <a href='/'>
+            <Image src='/images/ru.svg' width={20} height={15} />
+          </a>
+        </div>
         <Navbar.Toggle aria-controls='basic-navbar-nav' className='me-3' />
         <Navbar.Collapse id='basic-navbar-nav' className='justify-content-end'>
           <Nav className='ms-3 me-5 ps-2'>

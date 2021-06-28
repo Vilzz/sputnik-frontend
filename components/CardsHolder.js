@@ -2,6 +2,7 @@ import Image from 'next/image'
 import MaketCard from './MaketCard'
 
 const CardsHolder = ({ category }) => {
+  const sortMakets = (a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0)
   return (
     <div className='category-cards'>
       <div className='d-flex align-items-center mt-2'>
@@ -16,6 +17,7 @@ const CardsHolder = ({ category }) => {
       <hr />
       <div className='d-flex flex-wrap justify-content-evenly align-items-start'>
         {category.makets
+          .sort(sortMakets)
           .filter((maket) => maket.published === true)
           .map((maket) => (
             <MaketCard maket={maket} key={maket._id} />

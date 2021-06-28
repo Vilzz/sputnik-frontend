@@ -8,7 +8,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       {router.locale === 'ru-RU' ? (
         <>
-          <p>Copyright &copy; Макетная студия "Спутник" 2021</p>
+          <p>Copyright &copy; Макетная компания "Спутник" 2021</p>
           <p>
             <Link href='/about'>
               <a>О проекте</a>
@@ -17,7 +17,7 @@ const Footer = () => {
         </>
       ) : (
         <>
-          <p>Copyright &copy; Sputnik makets studio 2021</p>
+          <p>Copyright &copy; Sputnik makets company 2021</p>
           <p>
             <Link href={`/about`}>
               <a>About This Project</a>
