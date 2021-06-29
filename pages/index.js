@@ -7,10 +7,15 @@ import { API_URL } from '@/config/index.js'
 import { formatDate } from '@/helpers/index'
 import { Button, Col, Row, Card } from 'react-bootstrap'
 import CallBack from '@/components/CallBack'
-import SearchForm from '@/components//SearchForm'
+import SearchForm from '@/components/SearchForm'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Home = ({ categories, articles }) => {
   const router = useRouter()
+  const setToast = (txt, type) => {
+    type ? toast.success(txt) : toast.error(txt)
+  }
   return (
     <Layout
       title={
@@ -25,6 +30,7 @@ const Home = ({ categories, articles }) => {
       }
       keywords='макеты ракет, спутник мактеная компания, макеты космос'
     >
+      <ToastContainer />
       <Col className='pt-5'>
         <Row>
           <Col md={3}>
@@ -170,7 +176,7 @@ const Home = ({ categories, articles }) => {
         </Row>
         <Row className='my-3'>
           <Col md={9}>
-            <CallBack />
+            <CallBack setToast={setToast} />
           </Col>
           <Col md={3} className='ps-md-0'>
             <div className='search-form'>
