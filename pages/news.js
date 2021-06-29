@@ -4,6 +4,7 @@ import Layout from '@/components/Layout'
 import Article from '@/components/Article'
 import { useRouter } from 'next/router'
 import { FaNewspaper } from 'react-icons/fa'
+import { Col } from 'react-bootstrap'
 
 const News = ({ articles }) => {
   const router = useRouter()
@@ -17,14 +18,16 @@ const News = ({ articles }) => {
       }
       keywords='новости о макетах, новые макеты, макеты ракет, spaceship makets'
     >
-      <h1 className='text-primary mt-3 mb-2 ms-5'>
-        <FaNewspaper className='me-2' />
-        {router.locale === 'ru-RU' ? 'Новости' : 'News'}
-      </h1>
-      <div className='px-4 mb-3'>
-        <hr />
-      </div>
-      <Article articles={articles} />
+      <Col md={{ span: 10, offset: 1 }}>
+        <h1 className='text-primary mt-3 ms-5'>
+          <FaNewspaper className='me-2' />
+          {router.locale === 'ru-RU' ? 'Новости' : 'News'}
+        </h1>
+        <div className='px-4 mb-4'>
+          <hr />
+        </div>
+        <Article articles={articles} />
+      </Col>
     </Layout>
   )
 }

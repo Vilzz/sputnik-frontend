@@ -7,6 +7,7 @@ import { API_URL } from '@/config/index.js'
 import { formatDate } from '@/helpers/index'
 import { Button, Col, Row, Card } from 'react-bootstrap'
 import CallBack from '@/components/CallBack'
+import SearchForm from '@/components//SearchForm'
 
 const Home = ({ categories, articles }) => {
   const router = useRouter()
@@ -168,8 +169,13 @@ const Home = ({ categories, articles }) => {
           </Col>
         </Row>
         <Row className='my-3'>
-          <Col md={{ span: 8, offset: 2 }}>
+          <Col md={9}>
             <CallBack />
+          </Col>
+          <Col md={3} className='ps-md-0'>
+            <div className='search-form'>
+              <SearchForm />
+            </div>
           </Col>
         </Row>
       </Col>
@@ -180,7 +186,7 @@ export default Home
 
 export const getServerSideProps = async () => {
   const categories = await axios.get(`${API_URL}categories?sort=order`)
-  const articles = await axios.get(`${API_URL}articles?sort=createdAt`)
+  const articles = await axios.get(`${API_URL}articles?sort=-createdAt`)
   return {
     props: {
       categories: categories.data.data,

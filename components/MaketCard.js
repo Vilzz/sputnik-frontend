@@ -32,7 +32,11 @@ const MaketCard = ({ maket }) => {
         </Card.Text>
         <div className='scale-card mb-3'>
           <div>
-            <h6>Доступные масштабы: </h6>
+            <h6>
+              {router.locale === 'ru-RU'
+                ? 'Доступные масштабы:'
+                : 'Avialable scales'}
+            </h6>
             {maket.scales.map((scale) => (
               <span className='scale-badge bg-success' key={scale}>
                 {scale}
@@ -40,7 +44,9 @@ const MaketCard = ({ maket }) => {
             ))}
           </div>
           <Link href={`/catalog/maket/${maket._id}`}>
-            <a className='btn btn-primary'>Подробнее</a>
+            <a className='btn btn-primary'>
+              {router.locale === 'ru-RU' ? 'Подробнее...' : 'More info...'}
+            </a>
           </Link>
         </div>
       </Card.Body>

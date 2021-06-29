@@ -63,10 +63,14 @@ const Maket = ({ maket }) => {
             </Link>
           </div>
           <div className='d-flex justify-content-between align-items-center px-2'>
-            <h5>Срок производства:</h5>
+            <h5>
+              {router.locale === 'ru-RU'
+                ? 'Срок производства:'
+                : 'Production time'}
+            </h5>
             <div>
               <span className='scale-badge bg-primary'>
-                {maket.prodtime} дней
+                {maket.prodtime} {router.locale === 'ru-RU' ? 'дней' : 'days'}
               </span>
             </div>
           </div>
@@ -99,7 +103,9 @@ const Maket = ({ maket }) => {
           </div>
 
           <Link href={`/catalog/${maket.category.slug}`}>
-            <a className='btn btn-primary'>В каталог</a>
+            <a className='btn btn-primary'>
+              {router.locale === 'ru-RU' ? 'В каталог' : 'To catalog'}
+            </a>
           </Link>
         </div>
       </div>

@@ -215,11 +215,24 @@ td{
     background-color: #0d6efd;
   }
   .callback-form{
-    padding-top: 30px;
+    padding-top: 20px;
     padding-bottom: 30px;
     border: 1px solid #b6b6b6;
     border-radius: 9px;
   }
+  .search-form{
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 14px;
+    border: 1px solid #b6b6b6;
+    border-radius: 9px;
+  }
+  .btn-outline-primary:hover{
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,1) 20%, rgba(13,110,253,1) 55%);
+     }
   @media (max-width: 600px) {
     .nav-link::before{
       content:"‣ ";
