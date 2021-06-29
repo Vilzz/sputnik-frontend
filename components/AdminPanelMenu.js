@@ -109,6 +109,17 @@ const AdminPanelMenu = ({ title }) => {
             <a className='sidemenu-link'>Статьи</a>
           </Link>
         </li>
+        <li
+          className={
+            router.pathname === '/admin/requests'
+              ? 'list-group-item d-flex justify-content-between align-items-start active'
+              : 'list-group-item d-flex justify-content-between align-items-start'
+          }
+        >
+          <Link href='/admin/requests'>
+            <a className='sidemenu-link'>Запросы</a>
+          </Link>
+        </li>
       </ul>
     </div>
   )
