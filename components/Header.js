@@ -4,6 +4,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { Nav, Navbar, NavbarBrand } from 'react-bootstrap'
+import { FaPhoneAlt } from 'react-icons/fa'
+import { GoMail } from 'react-icons/go'
 
 const Header = () => {
   const { user, logout } = useContext(AuthContext)
@@ -86,6 +88,20 @@ const Header = () => {
             <Image src='/images/ru.svg' width={20} height={15} />
           </a>
         </div>
+        <div className='contacts d-flex flex-column justify-content-end align-items-end'>
+          <Link href='tel:88462192386'>
+            <a>
+              <FaPhoneAlt className='me-1' />
+              +7 (846) 219 2386
+            </a>
+          </Link>
+          <Link href='email:sputnik-models@yandex.ru'>
+            <a>
+              <GoMail className='me-1' /> sputnik-models@yandex.ru
+            </a>
+          </Link>
+        </div>
+
         <Navbar.Toggle aria-controls='basic-navbar-nav' className='me-3' />
         <Navbar.Collapse id='basic-navbar-nav' className='justify-content-end'>
           <Nav className='ms-3 me-5 ps-2'>
