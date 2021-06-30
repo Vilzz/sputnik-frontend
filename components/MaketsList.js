@@ -35,7 +35,7 @@ const MaketsList = ({ makets, token }) => {
         <Row className='mb-4 maket-unit' key={maket._id}>
           <Col md={4} lg={3}>
             {maket.images.length > 0 ? (
-              <Image src={maket.images[0]} width={220} height={330} />
+              <Image src={maket.images[0].image} width={220} height={330} />
             ) : (
               <div
                 className='d-flex justify-content-center align-items-center'

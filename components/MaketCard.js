@@ -11,7 +11,7 @@ const MaketCard = ({ maket }) => {
         <Link href={`/catalog/maket/${maket._id}`}>
           <a>
             <Image
-              src={maket.images[0]}
+              src={maket.images[0].image}
               width='300px'
               height='450px'
               alt={maket.name}

@@ -30,11 +30,14 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
     category: DEFAULT_CATEGORY_ID,
     published: false,
   })
-  const [images, setImages] = useState(['Выбери изображение...'])
+  const [images, setImages] = useState([])
+  const [mainImage, setMainImage] = useState(false)
+
   const [scales, setScales] = useState([])
   const [imagesList, setImagesList] = useState([
     ...maketImages.map((im) => `/images/makets/${im}`),
   ])
+
   const [showModal, setShowModal] = useState(false)
 
   const handleSubmit = async (e) => {
@@ -66,10 +69,6 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
     setMaketData({ ...maketData, [e.target.name]: e.target.value })
   }
 
-  const imageSelected = (e) => {
-    setImages([e.target.value])
-  }
-
   const checkBoxChange = (e) => {
     const scalesArray = scales
     const sortScales = (a, b) => {
@@ -92,15 +91,27 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
       ])
     }
   }
+  const imageSelected = (e) => {
+    const imagesArray = []
+    imagesArray.push({ image: e.target.value, isMain: true })
+    setImages([...imagesArray])
+    setMainImage(true)
+  }
+
   const imageUploaded = (text) => {
     if (text.data === 'Success') {
       toast.success(`Изображение добавлено ${text.file}`)
-      setImages([text.file])
-      setImagesList([text.file, ...imagesList])
+      if (!mainImage) {
+        setImages([{ image: text.file, isMain: true }])
+        setImagesList([text.file, ...imagesList])
+      } else {
+        setImages([...images, { image: text.file, isMain: false }])
+      }
     } else {
       toast.error(`Ошибка: ${text.error}`)
     }
   }
+
   return (
     <Layout>
       <ToastContainer />
@@ -283,22 +294,24 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
             </Form.Control>
           </Col>
         </Row>
-        <Row className='justify-content-md-center'>
+
+        <Row>
           <Col md={{ span: 2, offset: 1 }}>
-            {images[0] !== 'Выбери изображение...' ? (
-              <Image src={images[0]} width={70} height={105} />
+            {images.length > 0 ? (
+              <Image src={images[0].image} width={70} height={105} />
             ) : (
               <h5 className='mt-4'>Не выбрано</h5>
             )}
           </Col>
+
           <Col md={3}>
-            <Form.Label>Выбери изображение для макета</Form.Label>
+            <Form.Label>Основное изображение</Form.Label>
             <Form.Control
               as='select'
               name='image'
               onChange={(e) => imageSelected(e)}
             >
-              <option>{images[0]}</option>
+              <option>Выбери изображение...</option>
               {imagesList
                 .filter((img) => img !== images[0])
                 .map((img) => (
@@ -315,7 +328,26 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
               <FaImage className='me-1' /> Загрузить
             </Button>
           </Col>
-          <Col md={5} className='d-flex justify-content-md-center'>
+          <Col md={6}>
+            {images.length > 1 ? (
+              images
+                .filter((image, idx) => idx > 0)
+                .map((image) => (
+                  <Image
+                    src={image.image}
+                    width={50}
+                    height={75}
+                    key={image.image}
+                    className='me-2'
+                  />
+                ))
+            ) : (
+              <h6 className='mt-4'>Нет дополнительных изображений</h6>
+            )}
+          </Col>
+        </Row>
+        <Row>
+          <Col md={12} className='d-flex justify-content-md-center'>
             <div>
               <Button size='lg' className='mt-3' type='submit'>
                 <FaRegSave className='me-2' />
