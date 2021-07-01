@@ -6,7 +6,7 @@ import fs from 'fs'
 import axios from 'axios'
 import Layout from '@/components/Layout'
 import AdminRoutesProtection from '@/components/AdminRoutesProtection'
-import { FaPlus, FaImage, FaRegSave, FaList } from 'react-icons/fa'
+import { FaPlus, FaImage, FaRegSave, FaList, FaTimes } from 'react-icons/fa'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { parseCookies } from '@/helpers/index'
@@ -110,6 +110,17 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
     } else {
       toast.error(`Ошибка: ${text.error}`)
     }
+  }
+  const deleteSubImage = (e) => {
+    let idx
+    if (e.target.nodeName === 'path') {
+      idx = parseInt(e.target.parentNode.attributes.data.value)
+    } else {
+      idx = parseInt(e.target.attributes.data.value)
+    }
+
+    const arr = images.filter((img, index) => index !== idx + 1)
+    setImages([...arr])
   }
 
   return (
@@ -329,7 +340,38 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
             </Button>
           </Col>
           <Col md={6}>
-            {images.length > 1 ? (
+            <Row>
+              {images.length > 1 ? (
+                images
+                  .filter((image, idx) => idx > 0)
+                  .map((image, idx) => (
+                    <Col
+                      xs={2}
+                      key={image.image}
+                      className='d-flex flex-column align-items-center justify-content-start'
+                    >
+                      <div>
+                        <Image
+                          src={image.image}
+                          width={50}
+                          height={75}
+                          className='me-2'
+                        />
+                      </div>
+                      <div
+                        className='text-white badge rounded-pill bg-danger'
+                        data={idx}
+                        onClick={(e) => deleteSubImage(e)}
+                      >
+                        <FaTimes data={idx} />
+                      </div>
+                    </Col>
+                  ))
+              ) : (
+                <h6 className='mt-4'>Нет дополнительных изображений</h6>
+              )}
+            </Row>
+            {/* {images.length > 1 ? (
               images
                 .filter((image, idx) => idx > 0)
                 .map((image) => (
@@ -343,7 +385,7 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
                 ))
             ) : (
               <h6 className='mt-4'>Нет дополнительных изображений</h6>
-            )}
+            )} */}
           </Col>
         </Row>
         <Row>

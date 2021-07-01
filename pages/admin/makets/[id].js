@@ -6,7 +6,7 @@ import fs from 'fs'
 import axios from 'axios'
 import Layout from '@/components/Layout'
 import AdminRoutesProtection from '@/components/AdminRoutesProtection'
-import { FaPlus, FaImage, FaRegSave } from 'react-icons/fa'
+import { FaPlus, FaImage, FaRegSave, FaTimes } from 'react-icons/fa'
 import { TiArrowBackOutline } from 'react-icons/ti'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -37,7 +37,11 @@ const EditMaket = ({
     category: maket.category._id,
     published: maket.published,
   })
+
   const [images, setImages] = useState([...maket.images])
+  const [mainImage, setMainImage] = useState(
+    images.filter((img) => img.isMain === true).length > 0
+  )
   const [scales, setScales] = useState([...maket.scales])
   const [showModal, setShowModal] = useState(false)
 
@@ -73,18 +77,37 @@ const EditMaket = ({
   }
 
   const imageSelected = (e) => {
-    setImages([e.target.value])
+    const imagesArray = []
+    imagesArray.push({ image: e.target.value, isMain: true })
+    setImages([...imagesArray])
+    setMainImage(true)
   }
+
   const imageUploaded = (text) => {
     if (text.data === 'Success') {
       toast.success(`Изображение добавлено ${text.file}`)
-      setImages([text.file])
-      router.push(`/admin/makets/${router.query.id}`)
+      if (!mainImage) {
+        setImages([{ image: text.file, isMain: true }])
+        setImagesList([text.file, ...imagesList])
+      } else {
+        setImages([...images, { image: text.file, isMain: false }])
+      }
     } else {
       toast.error(`Ошибка: ${text.error}`)
     }
   }
 
+  const deleteSubImage = (e) => {
+    let idx
+    if (e.target.nodeName === 'path') {
+      idx = parseInt(e.target.parentNode.attributes.data.value)
+    } else {
+      idx = parseInt(e.target.attributes.data.value)
+    }
+
+    const arr = images.filter((img, index) => index !== idx + 1)
+    setImages([...arr])
+  }
   const checkBoxChange = (e) => {
     const scalesArray = scales
     const sortScales = (a, b) => {
@@ -293,21 +316,25 @@ const EditMaket = ({
         <Row className='justify-content-md-center'>
           <Col md={{ span: 2, offset: 1 }}>
             {images.length > 0 ? (
-              <Image src={images[0]} width={70} height={105} />
+              <Image
+                src={images.filter((img) => img.isMain === true)[0].image}
+                width={70}
+                height={105}
+              />
             ) : (
               <h5 className='mt-4'>Не выбрано</h5>
             )}
           </Col>
           <Col md={3}>
-            <Form.Label>Выбери изображение для макета</Form.Label>
+            <Form.Label>Основное изображение</Form.Label>
             <Form.Control
               as='select'
               name='image'
               onChange={(e) => imageSelected(e)}
             >
-              <option value={images[0]}>{images[0]}</option>
+              <option value={images[0].image}>{images[0].image}</option>
               {maketImages
-                .filter((img) => images[0] !== `/images/makets/${img}`)
+                .filter((img) => images[0].image !== `/images/makets/${img}`)
                 .map((img) => (
                   <option key={img} value={`/images/makets/${img}`}>
                     {`/images/makets/${img}`}
@@ -322,7 +349,42 @@ const EditMaket = ({
               <FaImage className='me-1' /> Загрузить
             </Button>
           </Col>
-          <Col md={5} className='d-flex justify-content-md-center'>
+          <Col md={6}>
+            <Row>
+              {images.length > 1 ? (
+                images
+                  .filter((image, idx) => idx > 0)
+                  .map((image, idx) => (
+                    <Col
+                      xs={2}
+                      key={image.image}
+                      className='d-flex flex-column align-items-center justify-content-start'
+                    >
+                      <div>
+                        <Image
+                          src={image.image}
+                          width={50}
+                          height={75}
+                          className='me-2'
+                        />
+                      </div>
+                      <div
+                        className='text-white badge rounded-pill bg-danger'
+                        data={idx}
+                        onClick={(e) => deleteSubImage(e)}
+                      >
+                        <FaTimes data={idx} />
+                      </div>
+                    </Col>
+                  ))
+              ) : (
+                <h6 className='mt-4'>Нет дополнительных изображений</h6>
+              )}
+            </Row>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={12} className='d-flex justify-content-md-center'>
             <div>
               <Button size='lg' className='mt-3 fw-bold' type='submit'>
                 <FaRegSave className='me-2' />

@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { GoGear, GoTrashcan } from 'react-icons/go'
 import { RiPriceTag2Line } from 'react-icons/ri'
+import { FaEye } from 'react-icons/fa'
 
 const MaketsList = ({ makets, token }) => {
   const router = useRouter()
@@ -107,6 +108,11 @@ const MaketsList = ({ makets, token }) => {
             </Row>
             <hr />
             <div className='d-flex justify-content-center mt-3'>
+              <Link href={`/catalog/maket/${maket._id}`}>
+                <a className='btn btn-info text-white fw-bold me-2'>
+                  <FaEye /> Просмотр
+                </a>
+              </Link>
               <Link href={`/admin/makets/${maket._id}/prices`}>
                 <a className='btn btn-warning text-white fw-bold me-2'>
                   <RiPriceTag2Line /> Цены

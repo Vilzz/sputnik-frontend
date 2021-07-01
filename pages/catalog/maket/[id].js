@@ -6,6 +6,8 @@ import { Table, Row, Col } from 'react-bootstrap'
 import axios from 'axios'
 import { API_URL } from '@/config/index'
 import Layout from '@/components/Layout'
+import { ImRocket } from 'react-icons/im'
+
 const Maket = ({ maket }) => {
   const router = useRouter()
   const [mainImage, setMainImage] = useState(maket.images[0].image)
@@ -124,8 +126,17 @@ const Maket = ({ maket }) => {
             )}
 
             <Link href={`/catalog/${maket.category.slug}`}>
-              <a className='btn btn-primary'>
-                {router.locale === 'ru-RU' ? 'В каталог' : 'To catalog'}
+              <a className='btn btn-primary mt-3 ms-3'>
+                {router.locale === 'ru-RU' ? (
+                  <>
+                    <ImRocket className='me-2' />
+                    Вернуться в каталог
+                  </>
+                ) : (
+                  <>
+                    <ImRocket className='me-2' /> Back to catalog
+                  </>
+                )}
               </a>
             </Link>
           </Col>
