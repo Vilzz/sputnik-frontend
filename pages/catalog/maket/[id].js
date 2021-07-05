@@ -113,11 +113,23 @@ const Maket = ({ maket }) => {
                       <tr key={_id}>
                         <td>{idx + 1}</td>
                         <td>{scale}</td>
-                        <td>
-                          {price.rub.symb}
-                          {price.rub.price}
-                        </td>
-                        <td>{price.rub.currency}</td>
+                        {router.locale === 'ru-RU' ? (
+                          <>
+                            <td>
+                              {price.rub.symb}
+                              {price.rub.price}
+                            </td>
+                            <td>{price.rub.currency}</td>
+                          </>
+                        ) : (
+                          <>
+                            <td>
+                              {price.usd.symb}
+                              {price.usd.price}
+                            </td>
+                            <td>{price.usd.currency}</td>
+                          </>
+                        )}
                       </tr>
                     ))}
                   </tbody>

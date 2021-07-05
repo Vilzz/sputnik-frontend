@@ -35,7 +35,7 @@ const Header = () => {
             </a>
           </Link>
         </li>
-        {router.locale === 'ru-RU' && (
+        {/* {router.locale === 'ru-RU' && (
           <li className='nav-item'>
             <Link href='/carier'>
               <a className='nav-link'>
@@ -43,7 +43,7 @@ const Header = () => {
               </a>
             </Link>
           </li>
-        )}
+        )} */}
 
         <li className='nav-item'>
           <Link href='/news'>
