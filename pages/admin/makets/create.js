@@ -177,7 +177,6 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
               name='name'
               value={maketData.name}
               onChange={(e) => handleChange(e)}
-              required
             />
           </Col>
           <Col md={5}>
@@ -189,7 +188,6 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
               name='name_en'
               value={maketData.name_en}
               onChange={(e) => handleChange(e)}
-              required
             />
           </Col>
         </Row>
@@ -203,7 +201,6 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
               name='shortdesc'
               value={maketData.shortdesc}
               onChange={(e) => handleChange(e)}
-              required
             />
           </Col>
           <Col md={5}>
@@ -215,7 +212,6 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
               name='shortdesc_en'
               value={maketData.shortdesc_en}
               onChange={(e) => handleChange(e)}
-              required
             />
           </Col>
         </Row>
@@ -230,7 +226,6 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
               name='description'
               value={maketData.description}
               onChange={(e) => handleChange(e)}
-              required
             />
           </Col>
           <Col md={5}>
@@ -243,7 +238,6 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
               name='description_en'
               value={maketData.description_en}
               onChange={(e) => handleChange(e)}
-              required
             />
           </Col>
         </Row>
@@ -258,7 +252,6 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
               name='keywords'
               value={maketData.keywords}
               onChange={(e) => handleChange(e)}
-              required
             />
           </Col>
           <Col md={5}>
@@ -271,7 +264,6 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
               name='keywords_en'
               value={maketData.keywords_en}
               onChange={(e) => handleChange(e)}
-              required
             />
           </Col>
         </Row>
@@ -285,7 +277,7 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
               name='prodtime'
               value={maketData.prodtime}
               onChange={(e) => handleChange(e)}
-              required
+              //required
             />
           </Col>
           <Col md={5}>

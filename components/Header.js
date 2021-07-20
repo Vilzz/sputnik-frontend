@@ -66,16 +66,16 @@ const Header = () => {
   return (
     <header>
       <Navbar bg='light' expand='lg' className='shadow'>
-        <NavbarBrand className='ms-5'>
+        <NavbarBrand className='ms-0 ms-md-5'>
           <Link href={`/`}>
             <a>
               <Image
-                src='/sputnik.svg'
-                width='240' //138
-                height='169' //110
+                src='/images/sputnik.svg'
+                width='276' //138
+                height='220' //110
                 alt='Sputnik Logo'
                 priority='true'
-                className='navbar-brand py-0'
+                //layout='fill'
               />
             </a>
           </Link>
