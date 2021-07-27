@@ -289,6 +289,7 @@ const CreateMaket = ({ token, maketImages, categories, defaultScales }) => {
               className='form-select'
               onChange={(e) => handleChange(e)}
             >
+              <option value={maketData.category}>Категория</option>
               {categories.map(({ name, _id }) => (
                 <option key={_id} value={_id}>
                   {name}

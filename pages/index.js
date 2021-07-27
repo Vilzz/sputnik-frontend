@@ -31,29 +31,31 @@ const Home = ({ categories, articles }) => {
       keywords='макеты ракет, спутник мактеная компания, макеты космос'
     >
       <ToastContainer />
-      <Col className='pt-5'>
+      <Col className='pt-5 d-flex flex-column'>
         <Row>
           <Col md={3}>
             <h3 className='px-2 mb-3'>
               {router.locale === 'ru-RU' ? 'Портфолио' : 'Portfolio'}
             </h3>
-            {categories.map((category) => (
-              <div className='d-grid gap-2 px-1' key={category._id}>
-                <Link href={`/catalog/${category.slug}`}>
-                  <Button
-                    variant='outline-primary'
-                    className='d-flex justify-content-between align-items-center mb-3'
-                  >
-                    <Image src={category.image} width={40} height={40} />
-                    <span>
-                      {router.locale === 'ru-RU'
-                        ? category.name
-                        : category.name_en}
-                    </span>
-                  </Button>
-                </Link>
-              </div>
-            ))}
+            {categories
+              .filter((category) => category.showinmenu === true)
+              .map((category) => (
+                <div className='d-grid gap-2 px-1' key={category._id}>
+                  <Link href={`/catalog/${category.slug}`}>
+                    <Button
+                      variant='outline-primary'
+                      className='d-flex justify-content-between align-items-center mb-3'
+                    >
+                      <Image src={category.image} width={40} height={40} />
+                      <span>
+                        {router.locale === 'ru-RU'
+                          ? category.name
+                          : category.name_en}
+                      </span>
+                    </Button>
+                  </Link>
+                </div>
+              ))}
           </Col>
           <Col md={6} className='mb-3'>
             <h3 className='ps-1'>
@@ -174,11 +176,11 @@ const Home = ({ categories, articles }) => {
             </Row>
           </Col>
         </Row>
-        <Row className='my-3'>
-          <Col md={9}>
+        <Row className='my-3 order-first order-md-0'>
+          <Col md={9} className='d-none d-md-block'>
             <CallBack setToast={setToast} />
           </Col>
-          <Col md={3} className='ps-md-0'>
+          <Col md={3} className='ps-md-0 pb-3 pb-md-0 order-first order-md-0'>
             <div className='search-form'>
               <SearchForm />
             </div>
